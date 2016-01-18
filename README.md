@@ -1,2 +1,4 @@
 # CSE110M240T10
-Hi everyone, I've set up our repository...
+_____________Whiskrs App_______________
+
+-Pantry Ingredients to Actual Recipes
