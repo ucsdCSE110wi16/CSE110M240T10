@@ -1,5 +1,6 @@
 package com.cs110.team10.whiskrs;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.goebl.david.Request;
+import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
 import org.json.JSONArray;
@@ -31,13 +34,6 @@ public class IngredientsInput extends AppCompatActivity {
                 String text = in.getText().toString();
                 clearInput(in);
                 TextView out = (TextView)findViewById(R.id.output);
-                out.setText(text);
-                /*Webb webb = Webb.create();
-                JSONObject result = webb
-                        .get("http://maps.googleapis.com/maps/api/directions/json")
-                        .ensureSuccess()
-                        .asJsonObject()
-                        .getBody();*/
             }
         });
     }
