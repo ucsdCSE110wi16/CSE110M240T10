@@ -1,0 +1,74 @@
+User Stories:
+Add ingredients to pantry
+Suggest recipes based on pantry
+Select meal suggestions from a list
+Cute “Cooking Mama” visual design style
+
+Wishlist:
+Add appliances
+Add cutlery
+Tell what ingredients are missing
+Locations/Prices to purchase (might be difficult)
+Favorite meals
+Filtering recipes (might be difficult)
+Meal difficulty in preparation (might be difficult)
+Chef avatar
+Drinks too
+
+Tasks:
+Add ingredients to pantry
+-Define ingredient class (name, picture, quantity)
+-Define pantry class (accessor method, add method, traverse method, remove method)
+-Define pantry accessor/modifier class (UI connection, graphical display of ingredients)
+-Way to add ingredients
+-Way to remove ingredients
+Suggest recipes based on pantry
+-API calls
+--JSON client
+--Website parser
+-Define recipe object (name, picture, ingredients, process, time)
+-Define recipe display class (UI connection, graphical display of recipes)
+-Way to get recipes
+-Way to display recipes
+Select meal suggestions from a list
+-Display recipes in a graphical manner
+-Standardized page to read recipes when selected
+-Way to select recipes
+-Way to show recipe process
+Cute visual design
+-Preliminary paper/digital mock-up of visuals (UI)
+-Design of primary interactions (UX)
+--Adding/Removing ingredients
+--Viewing ingredients
+--Displaying suggested recipes
+--Selecting recipes
+--Displaying selected recipe
+-Color scheme
+-Graphics standard template
+--Button design
+--Input design
+--List design
+--Display design
+-Asset creation
+--Custom buttons
+--Custom backgrounds
+--Custom ingredient images
+Filter recipes by appliance/cutlery/type of food
+-Define above abstract class filter (name, picture)
+-Filter recipes
+--Remove recipes without these
+Missing ingredients
+-Display missing ingredients on recipe list or recipe description
+-Location / prices:
+--Google Shopping API call
+Favorite Meals
+-Favorite array to store recipes
+-Marked if possible
+Meal difficulty
+-Will depend on recipe website to be parsed
+Chef avatar
+-Concept sketch/design
+-Finalized digital design
+-Digital animation
+Drinks
+-Will depend on recipe list
