@@ -1,0 +1,6 @@
+Objective: Create an ingredients to recipes app by the end of the quarter
+
+Milestones: 
+Milestone 1 (Week 5): User-input type ingredients, hit enter button, search recipes, provides recipe websites, preliminary designs
+Milestone 2 (Week 7): Store ingredients, better ingredient selection, designs finalized
+Milestone 3 (Week 9): Finalize UX, implement designs, all recipes visible in app

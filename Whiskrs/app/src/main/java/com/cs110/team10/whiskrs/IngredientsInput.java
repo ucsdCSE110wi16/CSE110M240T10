@@ -1,6 +1,7 @@
 package com.cs110.team10.whiskrs;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.view.ViewGroup;
 
 import com.goebl.david.Request;
 import com.goebl.david.Response;

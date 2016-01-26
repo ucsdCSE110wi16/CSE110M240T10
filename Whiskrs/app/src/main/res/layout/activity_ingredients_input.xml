@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cs110.team10.whiskrs.IngredientsInput">
+    tools:context="com.cs110.team10.whiskrs.IngredientsInput"
+    android:background="@color/colorPrimary">
 
     <EditText
         android:layout_width="fill_parent"
@@ -15,7 +16,11 @@
         android:id="@+id/editText"
         android:layout_below="@+id/ingredientsLabel"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#000000"
+        android:background="#ffffff"
+        android:padding="15px"
+        android:layout_marginTop="20px" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,24 +30,29 @@
         android:id="@+id/ingredientsLabel"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/searchText"
         android:id="@+id/searchIngredients"
-        android:layout_below="@+id/editText"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText"
+        android:padding="50px"
+        android:layout_marginTop="20px" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/output"
+        android:scrollIndicators="bottom|right"
+        android:padding="5dp"
+        android:layout_below="@+id/searchIngredients"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/searchIngredients"
-        android:scrollIndicators="bottom|right"
-        android:background="#686868" />
+        android:layout_marginTop="20px" />
 </RelativeLayout>
