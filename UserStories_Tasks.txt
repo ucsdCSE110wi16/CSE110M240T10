@@ -1,28 +1,20 @@
 User Stories:
-Add ingredients to pantry
-Suggest recipes based on pantry
-Select meal suggestions from a list
-Cute ìCooking Mamaî visual design style
+Add ingredients to pantry, which is stored within the app and can be edited
+Search recipes based on inventory of pantry, search returns recipes with matching ingredients to user's pantry
+Select recipe from results of search
+Cute ‚ÄúCooking Mama‚Äù visual design style (pastel colors, yellow and pink color scheme)
 
-Wishlist:
-Add appliances
-Add cutlery
-Tell what ingredients are missing
-Locations/Prices to purchase (might be difficult)
-Favorite meals
-Filtering recipes (might be difficult)
-Meal difficulty in preparation (might be difficult)
-Chef avatar
-Drinks too
 
 Tasks:
-Add ingredients to pantry
+Add ingredients to pantry, allow for storage and editing
 -Define ingredient class (name, picture, quantity)
 -Define pantry class (accessor method, add method, traverse method, remove method)
 -Define pantry accessor/modifier class (UI connection, graphical display of ingredients)
 -Way to add ingredients
 -Way to remove ingredients
-Suggest recipes based on pantry
+
+
+Search recipes based on inventory of pantry
 -API calls
 --JSON client
 --Website parser
@@ -53,7 +45,24 @@ Cute visual design
 --Custom buttons
 --Custom backgrounds
 --Custom ingredient images
-Filter recipes by appliance/cutlery/type of food
+
+
+Wishlist:
+Add appliances
+Add cutlery
+Tell what ingredients are missing
+Locations/Prices to purchase (might be difficult)
+Favorite meals
+Filtering recipes (might be difficult)
+Meal difficulty in preparation (might be difficult)
+Chef avatar
+Drinks too
+
+
+
+Wishlist Tasks: 
+
+Filter recipes by appliance/cutlery/type of food 
 -Define above abstract class filter (name, picture)
 -Filter recipes
 --Remove recipes without these
