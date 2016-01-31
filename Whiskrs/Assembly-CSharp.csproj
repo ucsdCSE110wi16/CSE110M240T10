@@ -52,9 +52,12 @@
      <Compile Include="Assets\Scripts\JSONClient\JSONClient.cs" />
      <Compile Include="Assets\Scripts\JSONClient\JSONSingleton.cs" />
      <Compile Include="Assets\Scripts\SuperCook\SuperCook.cs" />
+     <Compile Include="Assets\Scripts\ingredient.cs" />
      <Compile Include="Assets\Scripts\main.cs" />
+     <Compile Include="Assets\Scripts\recipe.cs" />
      <Compile Include="Assets\Scripts\recipesPanel.cs" />
      <Compile Include="Assets\Scripts\searchIngredientsPanel.cs" />
+     <Compile Include="Assets\Scripts\webParser.cs" />
      <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

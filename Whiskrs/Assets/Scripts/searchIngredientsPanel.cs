@@ -45,7 +45,7 @@ public class searchIngredientsPanel : MonoBehaviour {
         });
         button.transform.SetParent(resultGrid.transform);
         RectTransform rt = resultGrid.GetComponent<RectTransform>();
-        rt.Translate(new Vector3(0, -211, 0));
+        rt.Translate(new Vector3(-350,0, 0));
     }
 
     private void autocompleteCallback(JSONObject response)

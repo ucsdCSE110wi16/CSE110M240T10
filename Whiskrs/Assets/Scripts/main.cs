@@ -8,11 +8,13 @@ public class main : MonoBehaviour
     public static main Instance { get; private set; }
     public List<string> ingredients;
     public GameObject myIngredientsGrid;
+    public delegate void recipeLoaded(List<ingredient> ingredients, string directions);
 
     void Awake()
     {
         Instance = this;
         ingredients = new List<string>();
+        webParser.Instance.parse("", delegate { });
     }
 
     public void addIngredient(string ingredient) {
@@ -26,7 +28,7 @@ public class main : MonoBehaviour
 
     private void newButton(string name)
     {
-        GameObject button = (GameObject)Instantiate(Resources.Load("IngredientButton"), Vector3.zero, Quaternion.identity);
+        GameObject button = (GameObject)Instantiate(Resources.Load("myIngredientButton"), Vector3.zero, Quaternion.identity);
         Text txt = button.GetComponentInChildren<Text>();
         txt.text = name;
         Button b = button.GetComponent<Button>();
