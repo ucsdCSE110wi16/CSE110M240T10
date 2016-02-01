@@ -14,9 +14,9 @@ public class webParser : MonoBehaviour{
 
     public void parse(string u, main.recipeLoaded c)
     {
-        StartCoroutine(JSONClient.Get(url, recipeCallback));
-        url = u;
-        callback = c;
+      StartCoroutine(JSONClient.Get(url, recipeCallback));
+      url = u;
+      callback = c;
     }
 
     private static void recipeCallback(JSONObject response) {

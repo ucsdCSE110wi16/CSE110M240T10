@@ -20,25 +20,31 @@ public class recipesPanel : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        SuperCook.Instance.getRecipes(main.Instance.ingredients, callback);
+        // Trying to search with negative or 0 ingredients throws an error.
+        if(main.Instance.ingredients.Count > 0)
+            SuperCook.Instance.getRecipes(main.Instance.ingredients, callback);
+        // else: Handle searching for recepies with no selected ingredients.
     }
 
     void callback(SuperCookResult result)
     {
         if (result.results.Count > 0)
         {
-            foreach (SuperCookRecipe recipe in result.results)
-            {
-                GameObject button = (GameObject)Instantiate(Resources.Load("RecipeButton"), Vector3.zero, Quaternion.identity);
-                Text txt = button.GetComponentInChildren<Text>();
-                RawImage img = button.GetComponentInChildren<RawImage>();
-                txt.text = recipe.title;
-                Button b = button.GetComponent<Button>();
-                b.onClick.AddListener(delegate { openWebPage(recipe.url); });
-                StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
-                button.transform.SetParent(resultGrid.transform);
-                RectTransform rt = resultGrid.GetComponent<RectTransform>();
-                rt.Translate(new Vector3(0, -211, 0));
+            // Can't call Coroutines in an inactive instance, make sure it's active
+            if (Instance.isActiveAndEnabled) { 
+                foreach (SuperCookRecipe recipe in result.results)
+                {
+                    GameObject button = (GameObject)Instantiate(Resources.Load("RecipeButton"), Vector3.zero, Quaternion.identity);
+                    Text txt = button.GetComponentInChildren<Text>();
+                    RawImage img = button.GetComponentInChildren<RawImage>();
+                    txt.text = recipe.title;
+                    Button b = button.GetComponent<Button>();
+                    b.onClick.AddListener(delegate { openWebPage(recipe.url); });
+                    StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
+                    button.transform.SetParent(resultGrid.transform);
+                    RectTransform rt = resultGrid.GetComponent<RectTransform>();
+                    rt.Translate(new Vector3(0, -211, 0));
+                }
             }
         }
     }

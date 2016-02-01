@@ -14,6 +14,9 @@ public class main : MonoBehaviour
     {
         Instance = this;
         ingredients = new List<string>();
+        // Make sure we have an instance of webParser before attempting to use it.
+        // May need only add component here since Instance is set in webParser Awake function
+        webParser.Instance = gameObject.AddComponent<webParser>();
         webParser.Instance.parse("", delegate { });
     }
 
