@@ -1,14 +1,14 @@
 User Stories:
 1) As a user, I want to store the inventory of my pantry inside of the app, so that it can be saved and edited at any point.
 
-2) I want to be able to search for recipes based on the inventory of my pantry, so that the search returns possible recipes
+2) As a user, I want to be able to search for recipes based on the inventory of my pantry, so that the search returns possible recipes
   that match based on my ingredients.
 
-3) I want to be able to select the recipe from the list, and have it display the ingredients needed and the directions to         prepare the recipe. 
+3) As a user, I want to be able to select the recipe from the list, so that I see ingredients needed and the directions to prepare the recipe. 
 
-4)I want to be able to save recipes as favorites, so that I can quickly revisit them later. 
+4) As a user, I want to be able to save recipes as favorites, so that I can quickly revisit them later. 
 
-5) I want a cute “Cooking Mama” visual design style, with pastel colors and a yellow and pink color scheme, so that the interface of the app delights me. 
+5) As a user, I want a cute “Cooking Mama” visual design style, with pastel colors and a yellow and pink color scheme, so that the interface of the app delights me. 
 
 
 Tasks:
