@@ -4,3 +4,31 @@ Milestones:
 Milestone 1 (Week 5): User-input type ingredients, hit enter button, search recipes, provides recipe websites, preliminary designs
 Milestone 2 (Week 7): Store ingredients, better ingredient selection, designs finalized
 Milestone 3 (Week 9): Finalize UX, implement designs, all recipes visible in app
+
+Week 1: Get project idea
+
+Week 2: Learn Android Studio / find proper APIs
+
+Week 3: Scrapped Android studio and made app in Unity
+
+Week 4: Baseline app in Unity (ingredient selection -> recipes)
+
+Week 5 (Milestone 1):
+Monday: Show working "baseline" app
+Sunday: Optimizing API calls, store ingredients locally
+
+Week 6:
+Monday: Finish storing ingredients locally, group meeting, clean up designs, get feedback
+Tuesday - Sunday: Clean up ingredient selection, continue to work on Web Parsing
+
+Week 7 (Milestone 2):
+Monday: Present Milestone, get feedback
+Tuesday - Sunday: Web Parsing, start to put final design backgrounds in app, work on improving UX
+
+Week 8: Create final art assets / Web Parsing / Writing tests
+
+Week 9 (Milestone 3):
+Monday: Present Milestone, get feedback on final design
+Tuesday - Sunday: Finalization / testing
+
+Week 10: Completed
