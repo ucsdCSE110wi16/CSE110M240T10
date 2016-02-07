@@ -6,7 +6,7 @@ User Stories:
 
 3) As a user, I want to be able to select the recipe from the list, so that I see ingredients needed and the directions to prepare the recipe. 
 
-4) As a user, I want to be able to save recipes as favorites, so that I can quickly revisit them later. 
+4) As a user, I want to be able to save recipes as favorites, so that I can quickly revisit them later. I also want to be able to mark recipes so that they are no longer suggested to me. 
 
 5) As a user, I want a cute “Cooking Mama” visual design style, with pastel colors and a yellow and pink color scheme, so that the interface of the app delights me. 
 
@@ -41,6 +41,7 @@ Cute visual design
 --Displaying suggested recipes
 --Selecting recipes
 --Displaying selected recipe
+--Favoriting or banning selected recipe
 -Color scheme
 -Graphics standard template
 --Button design
