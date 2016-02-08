@@ -16,6 +16,11 @@ public class recipesPanel : MonoBehaviour
         Instance = this;
     }
 
+    public void display() {
+        if (main.Instance.ingredientsChanged)
+            searchRecipes();
+    }
+
     private void clearGrid()
     {
         foreach (Transform child in resultGrid.transform)
@@ -24,8 +29,9 @@ public class recipesPanel : MonoBehaviour
         }
     }
 
-    public void searchRecipes()
+    private void searchRecipes()
     {
+        main.Instance.ingredientsChanged = false;
         clearGrid();
         SuperCook.Instance.getRecipes(main.Instance.ingredients, callback);
     }
@@ -33,7 +39,6 @@ public class recipesPanel : MonoBehaviour
     void callback(SuperCookResult result)
     {
         this.result = result;
-        Debug.Log(this.result.total_can_make_right_now);
         index = 0;
         draw();
     }
@@ -67,12 +72,24 @@ public class recipesPanel : MonoBehaviour
         {
             foreach (SuperCookRecipe recipe in result.results)
             {
-                GameObject button = (GameObject)Instantiate(Resources.Load("RecipeButton"), Vector3.zero, Quaternion.identity);
+                string res = (main.Instance.isFavorite(recipe.id.ToString())) ? "RecipeButton 1" : "RecipeButton";
+                GameObject button = (GameObject)Instantiate(Resources.Load(res), Vector3.zero, Quaternion.identity);
                 Text txt = button.GetComponentInChildren<Text>();
                 RawImage img = button.GetComponentInChildren<RawImage>();
+                Toggle favButton = button.GetComponentInChildren<Toggle>();
                 txt.text = recipe.title;
                 Button b = button.GetComponent<Button>();
                 b.onClick.AddListener(delegate { openWebPage(recipe.url); });
+                favButton.onValueChanged.AddListener(delegate(bool val) {
+                    if (!val)
+                    {
+                        main.Instance.removeFavorite(recipe.id.ToString());
+                    }
+                    else
+                    {
+                        main.Instance.markAsFavorite(recipe.id.ToString());                        
+                    }
+                });
                 StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
                 button.transform.SetParent(resultGrid.transform);
                 RectTransform rt = resultGrid.GetComponent<RectTransform>();

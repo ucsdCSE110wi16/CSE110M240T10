@@ -35,7 +35,6 @@ public class SuperCook : MonoBehaviour{
             // Create Result container
             final = new SuperCookResult();
             final.total_can_make_right_now = int.Parse(result.GetField("total_can_make_right_now").ToString());
-            Debug.Log(final.total_can_make_right_now);
             final.results = new List<SuperCookRecipe>();
         }
         // Convert results

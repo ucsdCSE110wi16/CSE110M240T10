@@ -9,21 +9,51 @@ public class main : MonoBehaviour
     public List<string> ingredients;
     public GameObject myIngredientsGrid;
     public delegate void recipeLoaded(List<ingredient> ingredients, string directions);
+    public bool ingredientsChanged = true;
+    public string[] strArr;
+    public string[] favorites;
+    public List<string> favoriteRecipes;
 
     void Awake()
     {
         Instance = this;
         ingredients = new List<string>();
+        favoriteRecipes = new List<string>();
+        /*
         // Make sure we have an instance of webParser before attempting to use it.
         // May need only add component here since Instance is set in webParser Awake function
         webParser.Instance = gameObject.AddComponent<webParser>();
-        webParser.Instance.parse("", delegate { });
+        webParser.Instance.parse("", delegate { });*/
+        strArr = PlayerPrefs.GetString("ingredients").Split(',');
+        favorites = PlayerPrefs.GetString("favorites").Split(',');
+        Debug.Log(string.Join(",", favorites));
+        foreach (string s in favorites)
+        {
+            if (s != "") favoriteRecipes.Add(s);
+        }
     }
 
     public void addIngredient(string ingredient) {
         ingredients.Add(ingredient);
         newButton(ingredient);
+        ingredientsChanged = true;
         PlayerPrefs.SetString("ingredients", string.Join(",", ingredients.ToArray()));
+    }
+
+    public void markAsFavorite(string id) {
+        favoriteRecipes.Add(id);
+        PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
+    }
+
+    public void removeFavorite(string id)
+    {
+        favoriteRecipes.Remove(id);
+        PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
+    }
+
+    public bool isFavorite(string id)
+    {
+        return favoriteRecipes.Contains(id);
     }
 
     public bool hasIngredient(string ingredient) {

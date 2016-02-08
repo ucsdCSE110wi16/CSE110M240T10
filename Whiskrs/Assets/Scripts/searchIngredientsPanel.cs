@@ -7,19 +7,29 @@ public class searchIngredientsPanel : MonoBehaviour {
     public InputField input;
     public GameObject resultGrid;
     public static searchIngredientsPanel Instance { get; private set; }
-    private string[] strArr;
 
     void Awake() {
         Instance = this;
-        strArr = PlayerPrefs.GetString("ingredients").Split(',');
     }
 
     public void loadIngredients()
     {
         StartCoroutine(JSONClient.Post("http://www.supercook.com/dyn/sugg", new JSONObject("{\"needsimage\":1}"), suggestionsLoaded));
-        foreach (string s in strArr)
+        foreach (string s in main.Instance.strArr)
         {
-            main.Instance.addIngredient(s);
+            if(s != "") main.Instance.addIngredient(s);
+        }
+    }
+
+    public void togglePanel()
+    {
+        if (this.gameObject.GetComponent<RectTransform>().anchoredPosition.x <= 0)
+        {
+            this.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(5000, -175);
+        }
+        else
+        {
+            this.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -175);
         }
     }
 
