@@ -15,11 +15,12 @@ Week 4: Baseline app in Unity (ingredient selection -> recipes)
 
 Week 5 (Milestone 1):
 Monday: Show working "baseline" app
+Friday: Elizabeth creates pantry background
 Sunday: Optimizing API calls, store ingredients locally
 
 Week 6:
 Monday: Finish storing ingredients locally, group meeting, clean up designs, get feedback
-Tuesday - Sunday: Clean up ingredient selection, continue to work on Web Parsing
+Tuesday - Sunday: Clean up ingredient selection, continue to work on Web Parsing, Elizabeth creates recipe page background
 
 Week 7 (Milestone 2):
 Monday: Present Milestone, get feedback
