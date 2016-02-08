@@ -7,10 +7,20 @@ public class searchIngredientsPanel : MonoBehaviour {
     public InputField input;
     public GameObject resultGrid;
     public static searchIngredientsPanel Instance { get; private set; }
+    private string[] strArr;
 
     void Awake() {
         Instance = this;
-        StartCoroutine(JSONClient.Post("http://www.supercook.com/dyn/sugg", new JSONObject("{\"needsimage\":1}"),suggestionsLoaded));
+        strArr = PlayerPrefs.GetString("ingredients").Split(',');
+    }
+
+    public void loadIngredients()
+    {
+        StartCoroutine(JSONClient.Post("http://www.supercook.com/dyn/sugg", new JSONObject("{\"needsimage\":1}"), suggestionsLoaded));
+        foreach (string s in strArr)
+        {
+            main.Instance.addIngredient(s);
+        }
     }
 
     public void autocomplete() {

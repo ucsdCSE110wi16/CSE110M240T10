@@ -23,6 +23,7 @@ public class main : MonoBehaviour
     public void addIngredient(string ingredient) {
         ingredients.Add(ingredient);
         newButton(ingredient);
+        PlayerPrefs.SetString("ingredients", string.Join(",", ingredients.ToArray()));
     }
 
     public bool hasIngredient(string ingredient) {
@@ -40,6 +41,7 @@ public class main : MonoBehaviour
         {
             ingredients.Remove(b.name);
             GameObject.Destroy(b.gameObject);
+            PlayerPrefs.SetString("ingredients", string.Join(",", ingredients.ToArray()));
         });
         button.transform.SetParent(myIngredientsGrid.transform);
         RectTransform rt = myIngredientsGrid.GetComponent<RectTransform>();

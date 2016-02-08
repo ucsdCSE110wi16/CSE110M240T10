@@ -21,22 +21,12 @@ public class SuperCook : MonoBehaviour{
     public void getRecipes(List<string> ingredients, superCookDelegate responseFunction)
     {
         this.ingredients = ingredients;
-        SuperCookRequest data = new SuperCookRequest(1, listToString(ingredients), skip);
+        SuperCookRequest data = new SuperCookRequest(1, string.Join(",",ingredients.ToArray()), skip);
         JSONObject json = new JSONObject(data.ToString());
         Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Cookie", "myIngredients=" + WWW.EscapeURL(listToString(ingredients)));
+        headers.Add("Cookie", "myIngredients=" + WWW.EscapeURL(string.Join(",", ingredients.ToArray())));
         StartCoroutine(JSONClient.Post("http://www.supercook.com/dyn/results", json, callback, headers));
         finished = responseFunction;
-    }
-
-    // MOVE TO BETTER LOCATION
-    private string listToString(List<string> list)
-    {
-        string ret = "";
-        foreach(string str in list){
-            ret += str + ",";
-        }
-        return ret.Substring(0,ret.Length - 2);
     }
 
     // Network call completed
@@ -45,6 +35,7 @@ public class SuperCook : MonoBehaviour{
             // Create Result container
             final = new SuperCookResult();
             final.total_can_make_right_now = int.Parse(result.GetField("total_can_make_right_now").ToString());
+            Debug.Log(final.total_can_make_right_now);
             final.results = new List<SuperCookRecipe>();
         }
         // Convert results
