@@ -32,6 +32,8 @@ User Stories:
 - Estimated Time: 3hr (can be removed, needs to look better)
 - High priority
 
+9) As a user, I would like the vegetables in the menu screen to cascade slowly down the screen.
+- Medium/Low Priority
 
 Tasks:
 Add ingredients to pantry, allow for storage and editing
@@ -109,3 +111,4 @@ Chef avatar
 -Digital animation
 Drinks
 -Will depend on recipe list
+Barcode scanning ability
