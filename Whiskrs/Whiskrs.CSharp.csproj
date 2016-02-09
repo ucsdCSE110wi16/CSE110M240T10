@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\FallingFoodManager.cs" />
     <Compile Include="Assets\Scripts\JSONClient\JSON\JSONObject.cs" />
     <Compile Include="Assets\Scripts\JSONClient\JSON\JSONTemplates.cs" />
     <Compile Include="Assets\Scripts\JSONClient\JSON\SimpleJSON.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\Scripts\webParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Art\Palette.txt" />
     <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

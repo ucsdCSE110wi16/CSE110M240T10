@@ -143,6 +143,7 @@
     <Compile Include="Assets\Scripts\JSONClient\JSON\Editor\JSONChecker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Art\Palette.txt" />
     <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
