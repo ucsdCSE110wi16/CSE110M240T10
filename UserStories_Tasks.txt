@@ -33,7 +33,12 @@ User Stories:
 - High priority
 
 9) As a user, I would like the vegetables in the menu screen to cascade slowly down the screen.
+- Estimated Time: 2hr (completed)
 - Medium/Low Priority
+
+10) As a user, I want to able to see the recipe inside of the app or open it via a website so that I can make the recipe
+- Estimated Time: 40hr
+- Medium/High Priority
 
 Tasks:
 Add ingredients to pantry, allow for storage and editing
