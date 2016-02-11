@@ -13,6 +13,9 @@ public class webParser : MonoBehaviour{
         Instance = this;
     }
 
+    /*
+     * Send the url and downloaded html to web parser and it handles the rest
+     */
     public static recipe parse(string url, string html) {
         string baseURL = getURLBase(url);
         switch (baseURL) { 
@@ -22,6 +25,10 @@ public class webParser : MonoBehaviour{
         return null;
     }
 
+    /*
+     * Example parse (it is funcitonal)
+     * Gets name, ingredients, and directions based on itemprop attribute used by MyRecipes.com
+     */
     private static recipe parseMyRecipes(string html)
     {
         string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
@@ -33,6 +40,9 @@ public class webParser : MonoBehaviour{
         return new recipe(name, ingredients, directions, null);
     }
 
+    /*
+     * Returns everything inside of the <body></body>
+     */
     private static string getBody(string html)
     {
         int index = html.IndexOf("<body");
@@ -41,10 +51,17 @@ public class webParser : MonoBehaviour{
         return html;
     }
 
+    /*
+     * Removes all new lines from html
+     */
     private static string removeNewline(string html) {
         return Regex.Replace(html, @"\t|\n|\r", "");
     }
 
+    /*
+     * !!! Most used !!!
+     * Search for a specific div type with attribute and value
+     */
     private static List<string> getElementsByAttr(string html, string divType, string attr, string val) {
         List<string> divs = new List<string>();
         string query = attr + "=\"" + val + "\"";
@@ -71,18 +88,27 @@ public class webParser : MonoBehaviour{
         return divs;
     }
 
+    /*
+     * Remove everything inside of a <script></script>
+     */
     private static string removeScript(string html) {
         return removeBlock(html, "<script", "</script>");
     }
 
+    /*
+     * Remove the tags themselves and leave only the inner HTML
+     */
     private static string removeTags(string html) {
         return Regex.Replace(Regex.Replace(html, @"<[^>]+>|&nbsp;", "").Trim(), @"\s{2,}", " ");
     }
 
+    /*
+     * Remove all type of content between an opening and closing tag, dangerous, may crash computer if not careful
+     */
     private static string removeBlock(string html, string removeOpen, string removeClose)
     {
         int i = 0;
-        while (html.Contains(removeOpen) && i < 20)
+        while (html.Contains(removeOpen) && i < 100)
         {
             int index = html.IndexOf(removeOpen);
             string tmp = html.Substring(0, index);
@@ -93,6 +119,9 @@ public class webParser : MonoBehaviour{
         return html;        
     }
 
+    /*
+     * Returns the Base URL ex. www.github.com
+     */
     private static string getURLBase(string url)
     {
         string[] urlSplit = url.Split(new string[] { "://" }, StringSplitOptions.None);
