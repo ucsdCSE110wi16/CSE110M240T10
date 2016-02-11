@@ -21,6 +21,9 @@ public class webParser : MonoBehaviour{
         switch (baseURL) { 
             case "www.myrecipes.com":
                 return parseMyRecipes(html);
+
+        case "www.food.com":
+                return parseFoodDotCom(html);
         }
         return null;
     }
@@ -37,6 +40,28 @@ public class webParser : MonoBehaviour{
         foreach (string ing in getElementsByAttr(html, "div", "itemprop", "ingredient")) {
             ingredients.Add(removeTags(ing));
         }
+        return new recipe(name, ingredients, directions, null);
+    }
+
+    /*
+     * Gets name, ingredients, and directions from Food.com
+     */
+    private static recipe parseFoodDotCom(string html)
+    {
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "fd-recipe-title")[0]);
+
+        // Parse the directions
+        string directions = removeTags(getElementsByAttr(html, "ol", "class", "expanded")[0]);
+
+        // Parse the ingredients
+        List<string> ingredients = new List<String>();
+        string ingredientsHtml = getElementsByAttr (html, "div", "data-module", "ingredients")[0];
+        foreach (string ing in getElementsByAttr(ingredientsHtml, "li", "data-ingredient", "*")) {
+            ingredients.Add (removeTags(ing));
+        }
+
+        // Return the recipe object
         return new recipe(name, ingredients, directions, null);
     }
 
@@ -64,7 +89,14 @@ public class webParser : MonoBehaviour{
      */
     private static List<string> getElementsByAttr(string html, string divType, string attr, string val) {
         List<string> divs = new List<string>();
-        string query = attr + "=\"" + val + "\"";
+        string query;
+
+        // Wildcard val
+        if (val.Equals ("*")) {
+            query = attr;
+        } else {
+            query = attr + "=\"" + val + "\"";
+        }
         while (html.Contains(query))
         {
             int startIndex = html.IndexOf(query);
