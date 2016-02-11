@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class JSONClient{
     public delegate void responseDelegate(JSONObject response);
     public delegate void responseImageDelegate(Texture2D image, object place);
+    public delegate void responseHTMLDelegate(string html);
 
     public static IEnumerator Get(string url, responseDelegate responseFunction)
     {
@@ -19,6 +20,17 @@ public class JSONClient{
         yield return www;
         
 		callback(www.texture, place);
+    }
+
+    public static IEnumerator GetHTML(string url, responseHTMLDelegate callback)
+    {
+        // Start a download of the given URL
+        WWW www = new WWW(url);
+
+        // Wait for download to complete
+        yield return www;
+
+        callback(www.text);
     }
 
     public static IEnumerator Post(string url, JSONObject payload, responseDelegate responseFunction, Dictionary<string, string> headers = null)
