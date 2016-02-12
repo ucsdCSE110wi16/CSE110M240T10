@@ -23,13 +23,13 @@ public class searchIngredientsPanel : MonoBehaviour {
 
     public void togglePanel()
     {
-        if (this.gameObject.GetComponent<RectTransform>().anchoredPosition.x <= 0)
+        if (this.gameObject.GetComponent<RectTransform>().localScale.x == 0)
         {
-            this.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(5000, -175);
+            this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
         }
         else
         {
-            this.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -175);
+            this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0,0,0);
         }
     }
 
@@ -38,6 +38,8 @@ public class searchIngredientsPanel : MonoBehaviour {
         {
             GameObject.Destroy(child.gameObject);
         }
+        RectTransform rt = resultGrid.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(0, rt.sizeDelta.y);
         StartCoroutine(JSONClient.Get("http://www.supercook.com/dyn/autoc?term=" + WWW.EscapeURL(input.text), autocompleteCallback));
     }
 
@@ -58,14 +60,16 @@ public class searchIngredientsPanel : MonoBehaviour {
         txt.text = name;
         Button b = button.GetComponent<Button>();
         b.name = name;
+        RectTransform rt = resultGrid.GetComponent<RectTransform>();
         b.onClick.AddListener(() =>
         {
             main.Instance.addIngredient(b.name);
             GameObject.Destroy(b.gameObject);
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x - 500, rt.sizeDelta.y);
         });
         button.transform.SetParent(resultGrid.transform);
-        RectTransform rt = resultGrid.GetComponent<RectTransform>();
-        rt.Translate(new Vector3(-350,0, 0));
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x + 500, rt.sizeDelta.y);
+        button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 
     private void autocompleteCallback(JSONObject response)

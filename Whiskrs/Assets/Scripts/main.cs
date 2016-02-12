@@ -67,14 +67,16 @@ public class main : MonoBehaviour
         txt.text = name;
         Button b = button.GetComponent<Button>();
         b.name = name;
+        RectTransform rt = myIngredientsGrid.GetComponent<RectTransform>();
         b.onClick.AddListener(() =>
         {
             ingredients.Remove(b.name);
             GameObject.Destroy(b.gameObject);
             PlayerPrefs.SetString("ingredients", string.Join(",", ingredients.ToArray()));
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y - 250);
         });
         button.transform.SetParent(myIngredientsGrid.transform);
-        RectTransform rt = myIngredientsGrid.GetComponent<RectTransform>();
-        rt.Translate(new Vector3(0, -211, 0));
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + 250);
+        button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 }

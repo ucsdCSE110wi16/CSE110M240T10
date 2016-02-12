@@ -27,6 +27,8 @@ public class recipesPanel : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+        RectTransform rt = resultGrid.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(0, rt.sizeDelta.y);
     }
 
     private void searchRecipes()
@@ -93,7 +95,8 @@ public class recipesPanel : MonoBehaviour
                 StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
                 button.transform.SetParent(resultGrid.transform);
                 RectTransform rt = resultGrid.GetComponent<RectTransform>();
-                rt.Translate(new Vector3(0, -211, 0));
+                rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + 250);
+                button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             }
         }
     }
