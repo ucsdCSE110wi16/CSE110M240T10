@@ -17,7 +17,7 @@ public class recipesPanel : MonoBehaviour
     }
 
     public void display() {
-        if (main.Instance.ingredientsChanged)
+        if (main.Instance.ingredientsManager.ingredientsChanged)
             searchRecipes();
     }
 
@@ -33,9 +33,9 @@ public class recipesPanel : MonoBehaviour
 
     private void searchRecipes()
     {
-        main.Instance.ingredientsChanged = false;
+        main.Instance.ingredientsManager.ingredientsChanged = false;
         clearGrid();
-        SuperCook.Instance.getRecipes(main.Instance.ingredients, callback);
+        SuperCook.Instance.getRecipes(main.Instance.ingredientsManager.ingredients, callback);
     }
 
     void callback(SuperCookResult result)

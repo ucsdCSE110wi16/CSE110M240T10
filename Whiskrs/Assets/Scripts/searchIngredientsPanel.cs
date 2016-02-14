@@ -15,10 +15,6 @@ public class searchIngredientsPanel : MonoBehaviour {
     public void loadIngredients()
     {
         StartCoroutine(JSONClient.Post("http://www.supercook.com/dyn/sugg", new JSONObject("{\"needsimage\":1}"), suggestionsLoaded));
-        foreach (string s in main.Instance.strArr)
-        {
-            if(s != "") main.Instance.addIngredient(s);
-        }
     }
 
     public void togglePanel()
@@ -49,7 +45,7 @@ public class searchIngredientsPanel : MonoBehaviour {
         JSONArray arr = JSON.Parse(response.GetField("results").ToString()).AsArray;
         foreach (JSONNode jn in arr)
         {
-            if (!main.Instance.hasIngredient(jn))
+            if (!main.Instance.ingredientsManager.hasIngredient(jn))
                 newButton(jn["ingredient"]);
         }
     }
@@ -63,7 +59,7 @@ public class searchIngredientsPanel : MonoBehaviour {
         RectTransform rt = resultGrid.GetComponent<RectTransform>();
         b.onClick.AddListener(() =>
         {
-            main.Instance.addIngredient(b.name);
+            main.Instance.ingredientsManager.addIngredient(b.name);
             GameObject.Destroy(b.gameObject);
             rt.sizeDelta = new Vector2(rt.sizeDelta.x - 500, rt.sizeDelta.y);
         });
@@ -77,7 +73,7 @@ public class searchIngredientsPanel : MonoBehaviour {
         JSONArray arr = JSON.Parse(response.ToString()).AsArray;
         foreach (JSONNode jn in arr)
         {
-            if (!main.Instance.hasIngredient(jn))
+            if (!main.Instance.ingredientsManager.hasIngredient(jn))
                 newButton(jn);   
         }
     }
