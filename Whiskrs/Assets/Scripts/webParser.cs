@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 
 public class webParser : MonoBehaviour{
     public static webParser Instance;
+    public delegate void recipeLoaded(recipe result, string url);
+    private recipeLoaded func;
 
     public void Awake(){
         Instance = this;
@@ -16,16 +18,28 @@ public class webParser : MonoBehaviour{
     /*
      * Send the url and downloaded html to web parser and it handles the rest
      */
-    public static recipe parse(string url, string html) {
-        string baseURL = getURLBase(url);
-        switch (baseURL) { 
-            case "www.myrecipes.com":
-                return parseMyRecipes(html);
+    public void parse(string url, recipeLoaded func) {
+        this.func = func;
+        StartCoroutine(JSONClient.GetHTML(url,callback));
+    }
 
-        case "www.food.com":
-                return parseFoodDotCom(html);
+    private static void callback(string url, string html){
+        string baseURL = getURLBase(url);
+        recipe result = null;
+        Debug.Log(baseURL);
+        switch (baseURL)
+        {
+            case "www.myrecipes.com":
+                result = parseMyRecipes(html);
+                break;
+            case "www.food.com":
+                result = parseFoodDotCom(html);
+                break;
+            case "allrecipes.com":
+                result = parseAllRecipes(html);
+                break;
         }
-        return null;
+        webParser.Instance.func(result, url);
     }
 
     /*
@@ -39,6 +53,19 @@ public class webParser : MonoBehaviour{
         List<string> ingredients = new List<string>();
         foreach (string ing in getElementsByAttr(html, "div", "itemprop", "ingredient")) {
             ingredients.Add(removeTags(ing));
+        }
+        return new recipe(name, ingredients, directions, null);
+    }
+
+    private static recipe parseAllRecipes(string html) {
+        string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
+        string directions = removeTags(getElementsByAttr(html, "div", "itemprop", "recipeInstructions")[0]);
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "div", "itemprop", "ingredients"))
+        {
+            string initial = removeTags(ing);
+            initial = initial.Split('<')[0];
+            ingredients.Add(initial);
         }
         return new recipe(name, ingredients, directions, null);
     }

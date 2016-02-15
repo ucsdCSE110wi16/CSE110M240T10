@@ -9,7 +9,8 @@ public class recipesPanel : MonoBehaviour
     public GameObject resultGrid;
     public static recipesPanel Instance { get; private set; }
     private int index;
-    public int numToDisplay = 40;
+    public List<GameObject> recipeButtons;
+    public int BUTTON_HEIGHT = 250;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class recipesPanel : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
         RectTransform rt = resultGrid.GetComponent<RectTransform>();
+        recipeButtons = new List<GameObject>();
         rt.sizeDelta = new Vector2(0, rt.sizeDelta.y);
     }
 
@@ -41,30 +43,6 @@ public class recipesPanel : MonoBehaviour
     void callback(SuperCookResult result)
     {
         this.result = result;
-        index = 0;
-        draw();
-    }
-
-    public void handleScroll(Vector2 change)
-    {
-        if (result != null)
-        {
-            if (change.y == 1 && index != 0)
-                drawPrevious();
-            else if (change.y == 0)
-                drawNext();
-        }
-    }
-
-    private void drawNext()
-    {
-        index += numToDisplay;
-        draw();
-    }
-
-    private void drawPrevious()
-    {
-        index = (index - numToDisplay > 0) ? (index - numToDisplay) : 0;
         draw();
     }
 
@@ -81,34 +59,52 @@ public class recipesPanel : MonoBehaviour
                 Toggle favButton = button.GetComponentInChildren<Toggle>();
                 txt.text = recipe.title;
                 Button b = button.GetComponent<Button>();
-                b.onClick.AddListener(delegate { openWebPage(recipe.url); });
-                favButton.onValueChanged.AddListener(delegate(bool val) {
+                b.onClick.AddListener(delegate
+                {
+                    StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", setRecipeImage, null));
+                    webParser.Instance.parse(recipe.url, buttonClickCallback);
+                });
+                favButton.onValueChanged.AddListener(delegate(bool val)
+                {
                     if (!val)
                     {
                         main.Instance.removeFavorite(recipe.id.ToString());
                     }
                     else
                     {
-                        main.Instance.markAsFavorite(recipe.id.ToString());                        
+                        main.Instance.markAsFavorite(recipe.id.ToString());
                     }
                 });
                 StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
                 button.transform.SetParent(resultGrid.transform);
-                RectTransform rt = resultGrid.GetComponent<RectTransform>();
-                rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + 250);
                 button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+                shiftResultGrid();
+                recipeButtons.Add(button);
             }
         }
     }
 
-    private void openWebPage(string url)
+    private void shiftResultGrid() {
+        RectTransform rt = resultGrid.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + BUTTON_HEIGHT);
+    }
+
+    private void buttonClickCallback(recipe result, string url)
     {
-        //StartCoroutine(JSONClient.Get(url, recipeCallback));
-        Application.OpenURL(url);
+        if (result == null)
+            Application.OpenURL(url);
+        else {
+            recipeViewer.Instance.draw(result);
+        }
     }
 
     void imageCallback(Texture2D img, object place)
     {
         ((RawImage)place).texture = img;
+    }
+
+    void setRecipeImage(Texture2D img, object place)
+    {
+        recipeViewer.Instance.setImage(img);
     }
 }
