@@ -1,6 +1,6 @@
 User Stories:
 1) As a user, I want to store the inventory of my pantry inside of the app, so that it can be saved and edited at any point.
-- Estimated Time: 6hr (still need to save data)
+- Estimated Time: 6hr (complete)
 - High priority
 
 2) As a user, I want to be able to search for recipes based on the inventory of my pantry, so that the search returns possible recipes
@@ -9,11 +9,11 @@ User Stories:
 - High priority
 
 3) As a user, I want to be able to select the recipe from the list, so that I see ingredients needed and the directions to prepare the recipe. 
-- Estimated Time: 8hr (selection is completed, but web parsing is yet to be done)
+- Estimated Time: 8hr (selection is completed, web parsing is underway)
 - Selection is High priority, In-app display is Medium Priority
 
 4) As a user, I want to be able to save recipes as favorites, so that I can quickly revisit them later. I also want to be able to mark recipes so that they are no longer suggested to me. 
-- Estimated Time: 2hr
+- Estimated Time: 2hr  (in progress)
 - Medium Priority
 
 5) As a user, I want a cute “Cooking Mama” visual design style, with pastel colors and a yellow and pink color scheme, so that the interface of the app delights me. 
@@ -37,7 +37,7 @@ User Stories:
 - Medium/Low Priority
 
 10) As a user, I want to able to see the recipe inside of the app or open it via a website so that I can make the recipe
-- Estimated Time: 40hr
+- Estimated Time: 40hr  (in progress)
 - Medium/High Priority
 
 Tasks:
