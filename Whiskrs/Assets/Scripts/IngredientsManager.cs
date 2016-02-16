@@ -100,6 +100,7 @@ public class IngredientsManager {
         {
             selectedIngredients = new List<ingredient>();
         }
+        ingredientsChanged = true;
     }
 
     public void selectAll()
@@ -113,6 +114,7 @@ public class IngredientsManager {
             selectedIngredients = new List<ingredient>(ingredients);
         }
         updateSelected();
+        ingredientsChanged = true;
     }
 
     public void updateSelected(bool select = true)
