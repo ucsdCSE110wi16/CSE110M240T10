@@ -38,6 +38,9 @@ public class webParser : MonoBehaviour{
             case "allrecipes.com":
                 result = parseAllRecipes(html);
                 break;
+            case "www.foodnetwork.com":
+                result = parseFoodNetwork (html);
+                break;
         }
         webParser.Instance.func(result, url);
     }
@@ -93,6 +96,34 @@ public class webParser : MonoBehaviour{
     }
 
     /*
+     * Gets name, ingredients, and directions from foodnetwork.com
+     */
+    private static recipe parseFoodNetwork(string html) {
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByAttr(html, "h1", "itemprop", "name")[0]);
+
+        // Parse the directions
+        string directionsHtml = getElementsByAttr(html, "div", "class", "col10 directions")[0];
+        string directions = "";
+
+        // Last 2 paragraphs are not directions
+        List<string> paragraphs = getElementsByTag(directionsHtml, "p");
+        for (int i = 0; i < paragraphs.Count - 2; i++) {
+            directions += removeTags (paragraphs [i]) + "\n\n";
+        }
+
+        // Parse the ingredients
+        List<string> ingredients = new List<String>();
+        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "ingredients")) {
+            ingredients.Add (removeTags(ing));
+        }
+
+        // Return the recipe object
+        return new recipe(name, ingredients, directions, null);
+    }
+        
+
+    /*
      * Returns everything inside of the <body></body>
      */
     private static string getBody(string html)
@@ -108,6 +139,40 @@ public class webParser : MonoBehaviour{
      */
     private static string removeNewline(string html) {
         return Regex.Replace(html, @"\t|\n|\r", "");
+    }
+
+    /*
+     * Returns every instance of the tag passed in.
+     */
+    private static List<string> getElementsByTag(string html, string tag) {
+        List<string> tags = new List<string> ();
+
+        // Loop until none of the tags are left
+        string query = "<" + tag;
+        while (html.Contains(query)) {
+            // Get the tag
+            int startIndex = html.IndexOf(query);
+            int i =  startIndex;
+            while (html[i] != '>') {
+                i++;
+            }
+            int j = ++i;
+            string tmp = html.Substring(j);
+            j =  tmp.IndexOf("</" + tag + ">") + (tag.Length + 3);
+            while (tmp.IndexOf(query) < tmp.IndexOf("</" + tag + ">")) {
+                j = tmp.IndexOf("</" + tag + ">") + (tag.Length + 3);
+                tmp = tmp.Substring(tmp.IndexOf("</" + tag + ">") + (tag.Length + 3));
+            }
+
+            // Add the tag to the list
+            tags.Add(html.Substring(i, j));
+
+            // Remove the html we are done with
+            html = html.Substring(i + j);
+        }
+
+        // Return the tags we found
+        return tags;
     }
 
     /*
