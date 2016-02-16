@@ -20,11 +20,11 @@ Sunday: Optimizing API calls, store ingredients locally
 
 Week 6:
 Monday: Finish storing ingredients locally (John), group meeting, clean up designs (Kevin,Kaitlin,Elizabeth), get feedback
-Tuesday - Sunday: Clean up ingredient selection (John/Philip), continue to work on Web Parsing (John/Berkely/Aneesh), Elizabeth creates recipe page background
+Tuesday - Sunday: Clean up ingredient selection (John/Philip), continue to work on Web Parsing (John/Berkely/Aneesh), Kevin creates recipe page background
 
 Week 7 (Milestone 2):
 Monday: Present Milestone, get feedback
-Tuesday - Sunday: Web Parsing (Berkely/Aneesh), start to put final design backgrounds in app (John/Philip/Kevin), work on improving UX (Kaitlin/Kevin/Elizabeth)
+Tuesday - Sunday: Web Parsing (Berkely/Aneesh), start to put final design backgrounds in app (John/Philip/Kevin), work on improving UX (Kaitlin/Kevin/Elizabeth), Elizabeth finishes new vegetables & menu background
 
 Week 8: Create final art assets (Kevin/Elizabeth/Kaitlin) / Web Parsing (Berkely/Aneesh) / Writing tests (John/Philip)
 
