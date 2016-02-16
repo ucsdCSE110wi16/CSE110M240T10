@@ -9,7 +9,7 @@ public class FallingFoodManager : MonoBehaviour {
     public Vector2[] foodItemVelocities;
     public Sprite[] foodImages;
     public const int FallingFoodCount = 10;
-    public const float ScalingReductionFactor = 2.5f;
+    public const float ScalingReductionFactor = 5f;
     public static Vector2 MinVelocity = new Vector2(-2, -1);
     public static Vector2 MaxVelocity = new Vector2(2, -4);
     public Transform FoodParent;
