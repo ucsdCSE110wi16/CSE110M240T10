@@ -11,6 +11,7 @@ public class main : MonoBehaviour
     public delegate void recipeLoaded(List<ingredient> ingredients, string directions);
     public string[] favorites;
     public List<string> favoriteRecipes;
+    public Sprite[] trashImages;
     private bool firstStart = false;
 
     void Awake()
@@ -50,6 +51,29 @@ public class main : MonoBehaviour
     public bool isFavorite(string id)
     {
         return favoriteRecipes.Contains(id);
+    }
+
+    // These ar called on click from buttons in the ingredients Panel
+    public void selectAllPassAlong()
+    {
+        ingredientsManager.selectAll();
+    }
+    public void unselectAllPassAlong()
+    {
+        ingredientsManager.unselectAll();
+    }
+    public void trashBinPassAlong(GameObject trashBin)
+    {
+        if (ingredientsManager.trashMode)
+        {
+            ingredientsManager.endTrashMode();
+            trashBin.GetComponent<Image>().sprite = trashImages[0];
+        }
+        else
+        {
+            ingredientsManager.beginTrashMode();
+            trashBin.GetComponent<Image>().sprite = trashImages[1];
+        }
     }
     
 }

@@ -45,7 +45,7 @@ public class searchIngredientsPanel : MonoBehaviour {
         JSONArray arr = JSON.Parse(response.GetField("results").ToString()).AsArray;
         foreach (JSONNode jn in arr)
         {
-            if (!main.Instance.ingredientsManager.hasIngredient(jn))
+            if (!main.Instance.ingredientsManager.hasIngredient((string)jn))
                 newButton(jn["ingredient"]);
         }
     }
@@ -73,7 +73,7 @@ public class searchIngredientsPanel : MonoBehaviour {
         JSONArray arr = JSON.Parse(response.ToString()).AsArray;
         foreach (JSONNode jn in arr)
         {
-            if (!main.Instance.ingredientsManager.hasIngredient(jn))
+            if (!main.Instance.ingredientsManager.hasIngredient((string)jn))
                 newButton(jn);   
         }
     }

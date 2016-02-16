@@ -40,6 +40,10 @@ User Stories:
 - Estimated Time: 40hr  (in progress)
 - Medium/High Priority
 
+11) As a user, I want to be able to select ingredients in my pantry to search recipes for rather than all my ingredients in my pantry.
+- Estimated Time: 5hr (Completed)
+- Medium Priority
+
 Tasks:
 Add ingredients to pantry, allow for storage and editing
 -Define ingredient class (name, picture, quantity)
