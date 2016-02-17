@@ -44,6 +44,9 @@ public class webParser : MonoBehaviour{
             case "www.marthastewart.com":
                 result = parseMartha(html);
                 break;
+            case "www.epicurious.com":
+                result = parseEpicurious (html);
+                break;
         }
         webParser.Instance.func(result, url);
     }
@@ -129,6 +132,32 @@ public class webParser : MonoBehaviour{
         List<string> ingredients = new List<String>();
         foreach (string ing in getElementsByAttr(html, "li", "itemprop", "ingredients")) {
             ingredients.Add (removeTags(ing));
+        }
+
+        // Return the recipe object
+        return new recipe(name, ingredients, directions, null);
+    }
+
+    /*
+     * Gets name, ingredients, and directions from epicurious.com
+     */
+    private static recipe parseEpicurious(string html) {
+        // Parse the name of the recipe
+        string nameHtml = getElementsByAttr(html, "div", "class", "title-source")[0];
+        string name = removeTags(getElementsByAttr(nameHtml, "h1", "itemprop", "name")[0]);
+
+        // Parse the directions
+        string directions = "";
+        foreach (string dir in getElementsByAttr(html, "li", "class", "preparation-step")) {
+            string direction = removeTags (dir);
+            directions += direction.Substring(0, direction.Length - 1) + "\n\n";
+        }
+
+        // Parse the ingredients
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "li", "class", "ingredient")) {
+            string ingredient = removeTags (ing);
+            ingredients.Add (ingredient.Substring(0, ingredient.Length - 1));
         }
 
         // Return the recipe object
