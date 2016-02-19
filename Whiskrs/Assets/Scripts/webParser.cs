@@ -26,7 +26,6 @@ public class webParser : MonoBehaviour{
     private static void callback(string url, string html){
         string baseURL = getURLBase(url);
         recipe result = null;
-        Debug.Log(baseURL);
         switch (baseURL)
         {
             case "www.myrecipes.com":

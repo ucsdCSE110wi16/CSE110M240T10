@@ -54,12 +54,12 @@ public class IngredientsManager {
 
         // Load ingredients
         string[] strArr = PlayerPrefs.GetString("ingredients").Split(',');
+        selectedIngredients = new List<ingredient>();
         foreach (string s in strArr)
         {
             if (s != "")
                 addIngredient(new ingredient(s));
         }
-        selectedIngredients = new List<ingredient>();
         isInitialized = true;
     }
 
@@ -68,6 +68,7 @@ public class IngredientsManager {
         ingredients.Add(ingred);
         newButton(ingred);
         saveIngredients();
+        selectIngredient(ingred);
     }
 
     public bool hasIngredient(ingredient ingredient)

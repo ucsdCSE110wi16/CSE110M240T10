@@ -37,7 +37,8 @@ public class recipesPanel : MonoBehaviour
     {
         main.Instance.ingredientsManager.ingredientsChanged = false;
         clearGrid();
-        SuperCook.Instance.getRecipes(main.Instance.ingredientsManager.selectedIngredients.ConvertAll<string>(x => x.name), callback);
+        if(main.Instance.ingredientsManager.selectedIngredients.Count > 0)
+            SuperCook.Instance.getRecipes(main.Instance.ingredientsManager.selectedIngredients.ConvertAll<string>(x => x.name), callback);
     }
 
     void callback(SuperCookResult result)
@@ -54,28 +55,8 @@ public class recipesPanel : MonoBehaviour
             {
                 string res = (main.Instance.isFavorite(recipe.id.ToString())) ? "RecipeButton 1" : "RecipeButton";
                 GameObject button = (GameObject)Instantiate(Resources.Load(res), Vector3.zero, Quaternion.identity);
-                Text txt = button.GetComponentInChildren<Text>();
-                RawImage img = button.GetComponentInChildren<RawImage>();
-                Toggle favButton = button.GetComponentInChildren<Toggle>();
-                txt.text = recipe.title;
-                Button b = button.GetComponent<Button>();
-                b.onClick.AddListener(delegate
-                {
-                    StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", setRecipeImage, null));
-                    webParser.Instance.parse(recipe.url, buttonClickCallback);
-                });
-                favButton.onValueChanged.AddListener(delegate(bool val)
-                {
-                    if (!val)
-                    {
-                        main.Instance.removeFavorite(recipe.id.ToString());
-                    }
-                    else
-                    {
-                        main.Instance.markAsFavorite(recipe.id.ToString());
-                    }
-                });
-                StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
+                button.GetComponent<recipeButton>().initialize(recipe);
+
                 button.transform.SetParent(resultGrid.transform);
                 button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
                 shiftResultGrid();
@@ -87,24 +68,5 @@ public class recipesPanel : MonoBehaviour
     private void shiftResultGrid() {
         RectTransform rt = resultGrid.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + BUTTON_HEIGHT);
-    }
-
-    private void buttonClickCallback(recipe result, string url)
-    {
-        if (result == null)
-            Application.OpenURL(url);
-        else {
-            recipeViewer.Instance.draw(result);
-        }
-    }
-
-    void imageCallback(Texture2D img, object place)
-    {
-        ((RawImage)place).texture = img;
-    }
-
-    void setRecipeImage(Texture2D img, object place)
-    {
-        recipeViewer.Instance.setImage(img);
     }
 }

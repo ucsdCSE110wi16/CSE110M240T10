@@ -54,9 +54,11 @@
      <Compile Include="Assets\Scripts\JSONClient\JSONClient.cs" />
      <Compile Include="Assets\Scripts\JSONClient\JSONSingleton.cs" />
      <Compile Include="Assets\Scripts\SuperCook\SuperCook.cs" />
+     <Compile Include="Assets\Scripts\categoryButton.cs" />
      <Compile Include="Assets\Scripts\ingredient.cs" />
      <Compile Include="Assets\Scripts\main.cs" />
      <Compile Include="Assets\Scripts\recipe.cs" />
+     <Compile Include="Assets\Scripts\recipeButton.cs" />
      <Compile Include="Assets\Scripts\recipeViewer.cs" />
      <Compile Include="Assets\Scripts\recipesPanel.cs" />
      <Compile Include="Assets\Scripts\searchIngredientsPanel.cs" />
