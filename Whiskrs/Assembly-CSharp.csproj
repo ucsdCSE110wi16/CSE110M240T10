@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\JSONClient\JSONSingleton.cs" />
      <Compile Include="Assets\Scripts\SuperCook\SuperCook.cs" />
      <Compile Include="Assets\Scripts\categoryButton.cs" />
+     <Compile Include="Assets\Scripts\favoritesPanel.cs" />
      <Compile Include="Assets\Scripts\ingredient.cs" />
      <Compile Include="Assets\Scripts\main.cs" />
      <Compile Include="Assets\Scripts\recipe.cs" />

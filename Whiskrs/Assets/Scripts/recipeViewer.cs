@@ -23,19 +23,30 @@ public class recipeViewer : MonoBehaviour {
     {
         if (this.gameObject.GetComponent<RectTransform>().localScale.x == 0)
         {
-            this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            openPanel();
         }
         else
         {
-            this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+            closePanel();
         }
     }
 
     public void draw(recipe result) {
-        togglePanel();
+        openPanel();
+        favoritesPanel.Instance.closePanel();
         if (result.img != null) setImage(result.img);
         ingredientsObject.text = string.Join(",", result.ingredients.ToArray());
         directionsObject.text = result.directions;
         nameObject.text = result.name;
+    }
+
+    private void openPanel()
+    {
+        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+    }
+
+    private void closePanel()
+    {
+        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
     }
 }

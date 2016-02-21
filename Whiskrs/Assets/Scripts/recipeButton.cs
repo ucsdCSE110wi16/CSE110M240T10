@@ -22,11 +22,11 @@ public class recipeButton : MonoBehaviour {
         {
             if (!val)
             {
-                main.Instance.removeFavorite(recipe.id.ToString());
+                main.Instance.removeFavorite(recipe.id.ToString(), recipe.url, recipe.title);
             }
             else
             {
-                main.Instance.markAsFavorite(recipe.id.ToString());
+                main.Instance.markAsFavorite(recipe.id.ToString(), recipe.url, recipe.title);
             }
         });
         StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));

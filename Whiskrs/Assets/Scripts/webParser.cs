@@ -26,28 +26,35 @@ public class webParser : MonoBehaviour{
     private static void callback(string url, string html){
         string baseURL = getURLBase(url);
         recipe result = null;
-        switch (baseURL)
+        try
         {
-            case "www.myrecipes.com":
-                result = parseMyRecipes(html);
-                break;
-            case "www.food.com":
-                result = parseFoodDotCom(html);
-                break;
-            case "allrecipes.com":
-                result = parseAllRecipes(html);
-                break;
-            case "www.foodnetwork.com":
-                result = parseFoodNetwork (html);
-                break;
-            case "www.marthastewart.com":
-                result = parseMartha(html);
-                break;
-            case "www.epicurious.com":
-                result = parseEpicurious (html);
-                break;
+            switch (baseURL)
+            {
+                case "www.myrecipes.com":
+                    result = parseMyRecipes(html);
+                    break;
+                case "www.food.com":
+                    result = parseFoodDotCom(html);
+                    break;
+                case "allrecipes.com":
+                    result = parseAllRecipes(html);
+                    break;
+                case "www.foodnetwork.com":
+                    result = parseFoodNetwork(html);
+                    break;
+                case "www.marthastewart.com":
+                    result = parseMartha(html);
+                    break;
+                case "www.epicurious.com":
+                    result = parseEpicurious(html);
+                    break;
+            }
+            webParser.Instance.func(result, url);
         }
-        webParser.Instance.func(result, url);
+        catch
+        {
+            webParser.Instance.func(null, url);
+        }
     }
 
     private static recipe parseMartha(string html)

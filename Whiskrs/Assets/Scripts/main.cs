@@ -36,26 +36,32 @@ public class main : MonoBehaviour
             webParser.Instance.parse("", delegate { });*/
 
             favorites = PlayerPrefs.GetString("favorites").Split(',');
-            Debug.Log(string.Join(",", favorites));
             foreach (string s in favorites)
             {
-                if (s != "") favoriteRecipes.Add(s);
+                if (s != "")
+                {
+                    favoriteRecipes.Add(s);
+                    string[] vals = s.Replace("{", "").Replace("}","").Split(';');
+                    favoritesPanel.Instance.drawFavorite(vals[1],vals[0],vals[2]);
+                }
             }
             loadCategories();
         }
     }
 
-    public void markAsFavorite(string id) {
+    public void markAsFavorite(string id, string url, string title) {
         if (!favoriteRecipes.Contains(id))
         {
-            favoriteRecipes.Add(id);
+            favoriteRecipes.Add("{" + id + ";" + url + ";" + title + "}");
+            favoritesPanel.Instance.drawFavorite(url, id, title);
             PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
         }
     }
 
-    public void removeFavorite(string id)
+    public void removeFavorite(string id, string url, string title)
     {
-        favoriteRecipes.Remove(id);
+        favoriteRecipes.Remove("{" + id + ";" + url + ";" + title + "}");
+        favoritesPanel.Instance.removeFavorite(id);
         PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
     }
 
@@ -89,7 +95,13 @@ public class main : MonoBehaviour
 
     public bool isFavorite(string id)
     {
-        return favoriteRecipes.Contains(id);
+        foreach (string s in favoriteRecipes)
+        {
+            if (s.IndexOf(id) > -1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // These ar called on click from buttons in the ingredients Panel
