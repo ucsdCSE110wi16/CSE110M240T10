@@ -1,4 +1,4 @@
-User Stories:
+﻿User Stories:
 1) As a user, I want to store the inventory of my pantry inside of the app, so that it can be saved and edited at any point.
 - Estimated Time: 6hr (complete)
 - High priority
@@ -12,8 +12,8 @@ User Stories:
 - Estimated Time: 8hr (selection is completed, web parsing is underway)
 - Selection is High priority, In-app display is Medium Priority
 
-4) As a user, I want to be able to save recipes as favorites, so that I can quickly revisit them later. I also want to be able to mark recipes so that they are no longer suggested to me. 
-- Estimated Time: 2hr  (in progress)
+4) As a user, I want to be able to save recipes as favorites, so that I can quickly revisit them later.
+- Estimated Time: 2hr  (complete)
 - Medium Priority
 
 5) As a user, I want a cute “Cooking Mama” visual design style, with pastel colors and a yellow and pink color scheme, so that the interface of the app delights me. 
@@ -25,11 +25,11 @@ User Stories:
 - High Priority
 
 7) As a user, I want to be able to filter recipes by allergies, type, etc. so that I can make food I want/can eat.
-- Estimated Time: 3hr
+- Estimated Time: 3hr  (feature complete, needs UI cleanup)
 - Medium/Low Priority
 
 8) As a user, I want to be able to remove ingredients from my pantry, so that I know what I've used
-- Estimated Time: 3hr (can be removed, needs to look better)
+- Estimated Time: 3hr (complete)
 - High priority
 
 9) As a user, I would like the vegetables in the menu screen to cascade slowly down the screen.
@@ -42,6 +42,10 @@ User Stories:
 
 11) As a user, I want to be able to select ingredients in my pantry to search recipes for rather than all my ingredients in my pantry.
 - Estimated Time: 5hr (Completed)
+- Medium Priority
+
+12) As a user, I want to see the recipes I like most in a list so that I can quickly find them again
+- Estimated Time: 2hr (complete)
 - Medium Priority
 
 Tasks:

@@ -19,34 +19,12 @@ public class recipeViewer : MonoBehaviour {
         imageObject.texture = img;
     }
 
-    public void togglePanel()
-    {
-        if (this.gameObject.GetComponent<RectTransform>().localScale.x == 0)
-        {
-            openPanel();
-        }
-        else
-        {
-            closePanel();
-        }
-    }
-
     public void draw(recipe result) {
-        openPanel();
-        favoritesPanel.Instance.closePanel();
+        main.Instance.openPanel(gameObject);
+        main.Instance.closePanel(favoritesPanel.Instance.gameObject);
         if (result.img != null) setImage(result.img);
         ingredientsObject.text = string.Join(",", result.ingredients.ToArray());
         directionsObject.text = result.directions;
         nameObject.text = result.name;
-    }
-
-    private void openPanel()
-    {
-        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-    }
-
-    private void closePanel()
-    {
-        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
     }
 }

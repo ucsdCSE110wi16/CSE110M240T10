@@ -49,6 +49,10 @@ public class main : MonoBehaviour
         }
     }
 
+    public void ingredientsChanged() {
+        ingredientsManager.ingredientsChanged = !ingredientsManager.ingredientsChanged;
+    }
+
     public void markAsFavorite(string id, string url, string title) {
         if (!favoriteRecipes.Contains(id))
         {
@@ -104,6 +108,27 @@ public class main : MonoBehaviour
         return false;
     }
 
+    public void togglePanel(GameObject panel) {
+        if (panel.GetComponent<RectTransform>().localScale.x == 0)
+        {
+            openPanel(panel);
+        }
+        else
+        {
+            closePanel(panel);
+        }
+    }
+
+    public void closePanel(GameObject panel)
+    {
+        panel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+    }
+
+    public void openPanel(GameObject panel)
+    {
+        panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+    }
+
     // These ar called on click from buttons in the ingredients Panel
     public void selectAllPassAlong()
     {
@@ -125,6 +150,5 @@ public class main : MonoBehaviour
             ingredientsManager.beginTrashMode();
             trashBin.GetComponent<Image>().sprite = trashImages[1];
         }
-    }
-    
+    }    
 }

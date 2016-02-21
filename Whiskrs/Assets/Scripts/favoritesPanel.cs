@@ -48,21 +48,4 @@ public class favoritesPanel : MonoBehaviour {
         RectTransform rt = resultGrid.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y - BUTTON_HEIGHT);
     }
-
-    public void togglePanel()
-    {
-        if (this.gameObject.GetComponent<RectTransform>().localScale.x == 0)
-        {
-            this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        }
-        else
-        {
-            this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-        }
-    }
-
-    internal void closePanel()
-    {
-        this.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-    }
 }
