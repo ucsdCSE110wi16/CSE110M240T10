@@ -29,11 +29,6 @@ public class main : MonoBehaviour
             Instance = this;
             ingredientsManager = new IngredientsManager(myIngredientsGrid);
             favoriteRecipes = new List<string>();
-            /*
-            // Make sure we have an instance of webParser before attempting to use it.
-            // May need only add component here since Instance is set in webParser Awake function
-            webParser.Instance = gameObject.AddComponent<webParser>();
-            webParser.Instance.parse("", delegate { });*/
 
             favorites = PlayerPrefs.GetString("favorites").Split(',');
             foreach (string s in favorites)
@@ -56,7 +51,7 @@ public class main : MonoBehaviour
     public void markAsFavorite(string id, string url, string title) {
         if (!favoriteRecipes.Contains(id))
         {
-            favoriteRecipes.Add("{" + id + ";" + url + ";" + title + "}");
+            favoriteRecipes.Add("{" + id + ";" + url + ";" + title.Replace(",","") + "}");
             favoritesPanel.Instance.drawFavorite(url, id, title);
             PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
         }

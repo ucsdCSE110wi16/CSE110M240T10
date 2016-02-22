@@ -8,9 +8,10 @@ public class recipesPanel : MonoBehaviour
     public SuperCookResult result;
     public GameObject resultGrid;
     public static recipesPanel Instance { get; private set; }
-    private int index;
+    private int index = 0;
     public List<GameObject> recipeButtons;
-    public int BUTTON_HEIGHT = 250;
+    public GameObject nextButton;
+    public GameObject prevButton;
 
     void Awake()
     {
@@ -26,11 +27,8 @@ public class recipesPanel : MonoBehaviour
     {
         foreach (Transform child in resultGrid.transform)
         {
-            GameObject.Destroy(child.gameObject);
+            child.gameObject.SetActive(false);
         }
-        RectTransform rt = resultGrid.GetComponent<RectTransform>();
-        recipeButtons = new List<GameObject>();
-        rt.sizeDelta = new Vector2(0, rt.sizeDelta.y);
     }
 
     private void searchRecipes()
@@ -44,6 +42,7 @@ public class recipesPanel : MonoBehaviour
     void callback(SuperCookResult result)
     {
         this.result = result;
+        index = 0;
         draw();
     }
 
@@ -51,22 +50,42 @@ public class recipesPanel : MonoBehaviour
     {
         if (result.results.Count > 0)
         {
-            foreach (SuperCookRecipe recipe in result.results)
+            for (int i=index;i<index+4;i++)
             {
-                string res = (main.Instance.isFavorite(recipe.id.ToString())) ? "RecipeButton 1" : "RecipeButton";
-                GameObject button = (GameObject)Instantiate(Resources.Load(res), Vector3.zero, Quaternion.identity);
+                SuperCookRecipe recipe = result.results[i];
+                GameObject button = recipeButtons[i - index];
+                button.SetActive(true);
                 button.GetComponent<recipeButton>().initialize(recipe);
-
-                button.transform.SetParent(resultGrid.transform);
-                button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-                shiftResultGrid();
-                recipeButtons.Add(button);
             }
         }
     }
 
-    private void shiftResultGrid() {
-        RectTransform rt = resultGrid.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + BUTTON_HEIGHT);
+    public void next() {
+        if (index + 4 < result.results.Count)
+        {
+            index += 4;
+            prevButton.SetActive(true);
+        }
+        else
+        {
+            index = result.results.Count - 1;
+            nextButton.SetActive(false);
+        }
+        draw();
+    }
+
+    public void previous()
+    {
+        if (index - 4 >= 0)
+        {
+            index -= 4;
+            nextButton.SetActive(true);
+        }
+        else
+        {
+            index = 0;
+            prevButton.SetActive(false);
+        }
+        draw();
     }
 }

@@ -16,6 +16,7 @@ public class categoryButton : MonoBehaviour {
         gameObject.GetComponent<Button>().onClick.AddListener(delegate
         {
             active = !active;
+            main.Instance.ingredientsChanged();
             select();
             if (this.type == "meals")
                 main.Instance.mealtype = active?catName:"";

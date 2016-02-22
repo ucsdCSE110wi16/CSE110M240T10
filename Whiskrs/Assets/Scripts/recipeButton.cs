@@ -6,18 +6,15 @@ using System.Collections.Generic;
 public class recipeButton : MonoBehaviour {
     public SuperCookRecipe recipe;
 
-    public void initialize(SuperCookRecipe recipe) {
-        this.recipe = recipe;
-        Text txt = gameObject.GetComponentInChildren<Text>();
-        RawImage img = gameObject.GetComponentInChildren<RawImage>();
-        Toggle favButton = gameObject.GetComponentInChildren<Toggle>();
-        txt.text = recipe.title;
+    public void Awake()
+    {
         Button b = gameObject.GetComponent<Button>();
         b.onClick.AddListener(delegate
         {
             StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + this.recipe.id + ".jpg", setRecipeImage, null));
             webParser.Instance.parse(this.recipe.url, buttonClickCallback);
         });
+        Toggle favButton = gameObject.GetComponentInChildren<Toggle>();
         favButton.onValueChanged.AddListener(delegate(bool val)
         {
             if (!val)
@@ -29,6 +26,16 @@ public class recipeButton : MonoBehaviour {
                 main.Instance.markAsFavorite(recipe.id.ToString(), recipe.url, recipe.title);
             }
         });
+    }
+
+    public void initialize(SuperCookRecipe recipe) {
+        this.recipe = recipe;
+        Text txt = gameObject.GetComponentInChildren<Text>();
+        RawImage img = gameObject.GetComponentInChildren<RawImage>();
+        Toggle favButton = gameObject.GetComponentInChildren<Toggle>();
+        txt.text = recipe.title;
+        if (main.Instance.isFavorite(recipe.id.ToString())) favButton.isOn = true;
+        else favButton.isOn = false;        
         StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
     }
 
