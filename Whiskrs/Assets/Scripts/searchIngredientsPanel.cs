@@ -35,7 +35,7 @@ public class searchIngredientsPanel : MonoBehaviour {
             GameObject.Destroy(child.gameObject);
         }
         RectTransform rt = resultGrid.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(0, rt.sizeDelta.y);
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, 0);
         StartCoroutine(JSONClient.Get("http://www.supercook.com/dyn/autoc?term=" + WWW.EscapeURL(input.text), autocompleteCallback));
     }
 
@@ -61,10 +61,10 @@ public class searchIngredientsPanel : MonoBehaviour {
         {
             main.Instance.ingredientsManager.addIngredient(b.name);
             GameObject.Destroy(b.gameObject);
-            rt.sizeDelta = new Vector2(rt.sizeDelta.x - 500, rt.sizeDelta.y);
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y - 250);
         });
         button.transform.SetParent(resultGrid.transform);
-        rt.sizeDelta = new Vector2(rt.sizeDelta.x + 500, rt.sizeDelta.y);
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + 250);
         button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 

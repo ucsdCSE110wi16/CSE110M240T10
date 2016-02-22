@@ -13,7 +13,7 @@ public static partial class JSONTemplates {
 	static readonly HashSet<object> touched = new HashSet<object>();
 
 	public static JSONObject TOJSON(object obj) {		//For a generic guess
-		if(touched.Add(obj)) {
+		/*if(touched.Add(obj)) {
 			JSONObject result = JSONObject.obj;
 			//Fields
 			FieldInfo[] fieldinfo = obj.GetType().GetFields();
@@ -62,6 +62,8 @@ public static partial class JSONTemplates {
 		} 
 		Debug.LogWarning("trying to save the same data twice");
 		return JSONObject.nullJO;
+        */
+        return null;
 	}
 }
 

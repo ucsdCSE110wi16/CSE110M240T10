@@ -35,8 +35,15 @@ public class recipesPanel : MonoBehaviour
     {
         main.Instance.ingredientsManager.ingredientsChanged = false;
         clearGrid();
-        if(main.Instance.ingredientsManager.selectedIngredients.Count > 0)
-            SuperCook.Instance.getRecipes(main.Instance.ingredientsManager.selectedIngredients.ConvertAll<string>(x => x.name), callback);
+        if (main.Instance.ingredientsManager.selectedIngredients.Count > 0)
+        {
+            List<string> names = new List<string>();
+            foreach (ingredient i in main.Instance.ingredientsManager.selectedIngredients)
+            {
+                names.Add(i.name);
+            }
+            SuperCook.Instance.getRecipes(names, callback);
+        }
     }
 
     void callback(SuperCookResult result)

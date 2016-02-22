@@ -226,7 +226,11 @@ public class IngredientsManager {
 
     public void saveIngredients()
     {
-        PlayerPrefs.SetString("ingredients", string.Join(",", ingredients.ConvertAll<string>(x => x.name).ToArray()));
+        List<string> names = new List<string>();
+        foreach (ingredient i in ingredients) {
+            names.Add(i.name);
+        }
+        PlayerPrefs.SetString("ingredients", string.Join(",", names.ToArray()));
     }
 
 }
