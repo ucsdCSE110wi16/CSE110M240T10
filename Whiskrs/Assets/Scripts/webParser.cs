@@ -48,6 +48,12 @@ public class webParser : MonoBehaviour{
                 case "www.epicurious.com":
                     result = parseEpicurious(html);
                     break;
+                /*case "www.thekitchn.com":
+                    result = parseTheKitchn(html);
+                    break;*/
+                case "www.delish.com":
+                    result = parseDelish(html);
+                    break;
             }
             webParser.Instance.func(result, url);
         }
@@ -169,7 +175,51 @@ public class webParser : MonoBehaviour{
         // Return the recipe object
         return new recipe(name, ingredients, directions, null);
     }
-        
+
+    /*
+     * NOT IMPLEMENTED YET
+     * Gets name, ingredients, and directions from thekitchn.com
+     */
+    private static recipe parseTheKitchn(string html) {
+        // Return null for now
+        return null;
+
+        // Get the html associated with the recipe
+        string recipeHtml = getElementsByAttr(html, "div", "id", "recipe")[0];
+
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByTag(html, "h2")[0]);
+
+        // Parse the directions
+        string directions = "";
+    }
+     
+    /*
+     * Gets name, ingredients, and directions from delish.com
+     */
+    private static recipe parseDelish(string html) {
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "article-title")[0]);
+        name = name.Substring (0, name.Length - 1);
+
+        // Parse the directions
+        string directions = "";
+        foreach (string dir in getElementsByAttr(html, "li", "class", "recipe-directions-item")) {
+            string direction = removeTags(dir);
+            directions += direction.Substring (0, direction.Length - 1) + "\n\n";
+        }
+
+        // Parse the ingredients
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "ingredients")) {
+            string ingredient = removeTags (ing);
+            ingredient = ingredient.Substring (0, ingredient.Length - 1);
+            ingredients.Add(ingredient);
+        }
+
+        // Return the recipe object
+        return new recipe(name, ingredients, directions, null);
+    }
 
     /*
      * Returns everything inside of the <body></body>
