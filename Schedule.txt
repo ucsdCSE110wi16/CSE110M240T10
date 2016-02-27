@@ -26,10 +26,21 @@ Week 7 (Milestone 2):
 Monday: Present Milestone, get feedback
 Tuesday - Sunday: Web Parsing (Berkely/Aneesh), start to put final design backgrounds in app (John/Philip/Kevin), work on improving UX (Kaitlin/Kevin/Elizabeth), Elizabeth finishes new vegetables & menu background
 
-Week 8: Create final art assets (Kevin/Elizabeth/Kaitlin) / Web Parsing (Berkely/Aneesh) / Writing tests (John/Philip)
+Week 8: Create final art assets (Kevin/Elizabeth/Kaitlin) / Web Parsing (Berkely/Aneesh)
+www.myrecipes.com, www.food.com, allrecipes.com, www.foodnetwork.com, www.marthastewart.com, www.epicurious.com, www.delish.com completed
+Saturday/Sunday: Begin testing code (John) / UI finalization for filter page
 
-Week 9 (Milestone 3):
-Monday: Present Milestone, get feedback on final design
-Tuesday - Sunday: Finalization / testing
+Week 9:
+Monday: Present progress and get feedback on final design
+Tuesday - Sunday: 
+  - Panel transitions / finalization
+  - Finish Web parsing for other sites, write test code
+  - Add tests for ingredient interaction
+  - Add tests for favorites interaction
+  - Add tests for recipe viewer
+  - Add tests for filtering
 
-Week 10: Completed
+Week 10: Final edits
+ - Finish testing
+ - Final UI clean up
+ - Add "Easter egg" (maybe)
