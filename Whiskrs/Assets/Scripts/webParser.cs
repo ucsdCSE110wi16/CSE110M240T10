@@ -54,6 +54,15 @@ public class webParser : MonoBehaviour{
                 case "www.delish.com":
                     result = parseDelish(html);
                     break;
+                /*case "www.oprah.com":
+                    result = parseOprah(html);
+                    break;*/
+                /*case "albertsons.mywebgrocer.com":
+                    result = parseAlbertsons(html);
+                    break;*/
+                case "www.wegmans.com":
+                    result = parseWegmans(html);
+                    break;
             }
             webParser.Instance.func(result, url);
         }
@@ -215,6 +224,81 @@ public class webParser : MonoBehaviour{
             string ingredient = removeTags (ing);
             ingredient = ingredient.Substring (0, ingredient.Length - 1);
             ingredients.Add(ingredient);
+        }
+
+        // Return the recipe object
+        return new recipe(name, ingredients, directions, null);
+    }
+
+    /*
+     * NOT IMPLEMENTED YET
+     * Gets name, ingredients, and directions from oprah.com
+     */
+    private static recipe parseOprah(string html) {
+        // Return null for now
+        return null;
+
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "article-text-title")[0]);
+
+        // Parse the directions
+    }
+
+    /*
+     * NOT IMPLEMENTED YET
+     * Gets name, ingredients, and directions from albertsons.mywebgrocer.com
+     */
+    private static recipe parseAlbertsons(string html) {
+        // Return null for now
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "recipe-title")[0]);
+
+        // Parse the directions
+        string directionsHtml = getElementsByAttr(html, "di", "id", "RecipeDirections")[0];
+        string directions = "";
+        foreach (string dir in getElementsByAttr(html, "p", "class", "recipe-details-text")) {
+            string direction = removeTags (dir);
+            directions += direction.Substring (0, direction.Length) + "\n\n";
+        }
+
+        // Parse the ingredients
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "p", "class", "recipe-ingredient")) {
+            string ingredient = removeTags (ing);
+            ingredients.Add (ingredient);
+        }
+
+        // Return the recipe object
+        return new recipe(name, ingredients, directions, null);
+    }
+
+    /*
+     * Gets name, ingredients, and directions from www.wegmans.com
+     */
+    private static recipe parseWegmans(string html) {
+        // Parse the name of the recipe
+        string name = removeTags(getElementsByTag(html, "h1")[0]);
+
+        // Parse the directions
+        string directionsHtml = getElementsByAttr(html, "div", "id", "directions")[0];
+        string directions = "";
+        foreach (string dir in getElementsByTag(directionsHtml, "LI")) {
+            string direction = removeTags (dir);
+            directions += direction.Substring (0, direction.Length) + "\n\n";
+        }
+
+        // Parse the ingredients
+        string ingredientsHtml = getElementsByAttr(html, "div", "class", "contentEntry")[0];
+        List<string> ingredients = new List<string>(ingredientsHtml.Split (new string[] { "<br/>" }, StringSplitOptions.None));
+        for (int i = 0; i < ingredients.Count; i++) {
+            string ing = removeTags (ingredients [i]);
+            ing = ing.Trim ();
+            if (ing != "" && ing != "</div>") {
+                ingredients [i] = ing;
+            } else {
+                ingredients.Remove (ingredients [i]);
+                i--;
+            }
         }
 
         // Return the recipe object
