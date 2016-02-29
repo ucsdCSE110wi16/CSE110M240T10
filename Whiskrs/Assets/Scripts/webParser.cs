@@ -63,6 +63,16 @@ public class webParser : MonoBehaviour{
                 case "www.wegmans.com":
                     result = parseWegmans(html);
                     break;
+                /*case "www.rachaelraymag.com":
+                    result = parseRachaelRay(html);
+                    break;
+                case "www.traderjoes.com":
+                    result = parseTraderJoes(html);
+                    break;*/
+                case "www.cookstr.com":
+                    result = parseCookstr(html);
+                    break;
+
             }
             result.url = url;
             webParser.Instance.func(result, url);
@@ -72,6 +82,48 @@ public class webParser : MonoBehaviour{
             webParser.Instance.func(null, url);
         }
     }
+
+    /*//parse raychaelraymag.com
+    private static recipe parseRachaelRay(string html)
+    {
+        string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
+        string instructions = removeTags(getElementsByAttr(html, "div", "class", "recipe-instructions")[0]);
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "recipe-instructions"))
+        {
+            ingredients.Add(removeTags(ing));
+        }
+
+        return new recipe(name, ingredients, instructions, null);
+    }
+
+    //parse traderjoes.com
+    private static recipe parseTraderJoes(string html)
+    {
+        string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
+        string directions = removeTags(getElementsByAttr(html, "div", "class", "article")[0]);
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "bullet-list"))
+        {
+            ingredients.Add(removeTags(ing));
+        }
+
+        return new recipe(name, ingredients, directions, null);
+    }*/
+
+    //parse cookstr.com
+    private static recipe parseCookstr(string html)
+    {
+        string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
+        string directions = removeTags(getElementsByAttr(html, "div", "itemprop", "recipeInstructions")[0]);
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "div", "itemprop", "ingredients"))
+        {
+            ingredients.Add(removeTags(ing));
+        }
+        return new recipe(name, ingredients, directions, null);
+    }
+    
 
     private static recipe parseMartha(string html)
     {
