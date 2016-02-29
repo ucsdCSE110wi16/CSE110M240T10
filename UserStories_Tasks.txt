@@ -1,4 +1,4 @@
-﻿User Stories:
+User Stories:
 1) As a user, I want to store the inventory of my pantry inside of the app, so that it can be saved and edited at any point.
 - Estimated Time: 6hr (complete)
 - High priority
@@ -125,3 +125,4 @@ Chef avatar
 Drinks
 -Will depend on recipe list
 Barcode scanning ability
+Add sound effect when a user clicks a button
