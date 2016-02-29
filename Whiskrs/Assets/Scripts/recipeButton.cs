@@ -11,6 +11,9 @@ public class recipeButton : MonoBehaviour {
         Button b = gameObject.GetComponent<Button>();
         b.onClick.AddListener(delegate
         {
+            main.Instance.openPanel(recipeViewer.Instance.gameObject);
+            main.Instance.closePanel(favoritesPanel.Instance.gameObject);
+            recipeViewer.Instance.toTop();
             StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + this.recipe.id + ".jpg", setRecipeImage, null));
             webParser.Instance.parse(this.recipe.url, buttonClickCallback);
         });

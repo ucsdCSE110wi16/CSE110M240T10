@@ -7,6 +7,7 @@ public class recipe {
     public Texture2D img;
     public List<string> ingredients;
     public string directions;
+    public string url;
 
     public recipe(string nm, List<string> ing, string dir, Texture2D i)
     {

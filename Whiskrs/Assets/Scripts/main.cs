@@ -20,6 +20,7 @@ public class main : MonoBehaviour
     public string cuisine;
     public string mealtype;
     public List<string> restrictions;
+    public Dropdown cuisineSelector;
 
     void Awake()
     {
@@ -65,9 +66,6 @@ public class main : MonoBehaviour
     }
 
     private void loadCategories() {
-        foreach (string s in categories.cuisines) {
-            newCategoryButton(s, cuisineGrid, "cuisines");
-        }
         foreach (string s in categories.meals)
         {
             newCategoryButton(s, mealGrid, "meals");
@@ -76,6 +74,11 @@ public class main : MonoBehaviour
         {
             newCategoryButton(s, restrictionGrid, "restrictions");
         }
+    }
+
+    public void cuisineDropDownChanged() {
+        main.Instance.cuisine = cuisineSelector.captionText.text;
+        if (main.Instance.cuisine == "All") main.Instance.cuisine = "";
     }
 
     private void newCategoryButton(string s, GameObject grid, string category) {

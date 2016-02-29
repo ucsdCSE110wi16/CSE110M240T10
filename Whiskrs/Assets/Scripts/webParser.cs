@@ -64,6 +64,7 @@ public class webParser : MonoBehaviour{
                     result = parseWegmans(html);
                     break;
             }
+            result.url = url;
             webParser.Instance.func(result, url);
         }
         catch
@@ -107,7 +108,7 @@ public class webParser : MonoBehaviour{
         {
             string initial = removeTags(ing);
             initial = initial.Split('<')[0];
-            ingredients.Add(initial);
+            ingredients.Add(initial.Replace("ADVERTISEMENT",""));
         }
         return new recipe(name, ingredients, directions, null);
     }
