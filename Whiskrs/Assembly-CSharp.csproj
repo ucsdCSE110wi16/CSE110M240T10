@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\FallingFoodManager.cs" />
+     <Compile Include="Assets\Scripts\IngredientsManager.cs" />
      <Compile Include="Assets\Scripts\JSONClient\JSON\JSONObject.cs" />
      <Compile Include="Assets\Scripts\JSONClient\JSON\JSONTemplates.cs" />
      <Compile Include="Assets\Scripts\JSONClient\JSON\SimpleJSON.cs" />
@@ -53,12 +54,18 @@
      <Compile Include="Assets\Scripts\JSONClient\JSONClient.cs" />
      <Compile Include="Assets\Scripts\JSONClient\JSONSingleton.cs" />
      <Compile Include="Assets\Scripts\SuperCook\SuperCook.cs" />
+     <Compile Include="Assets\Scripts\categoryButton.cs" />
+     <Compile Include="Assets\Scripts\favoritesPanel.cs" />
      <Compile Include="Assets\Scripts\ingredient.cs" />
      <Compile Include="Assets\Scripts\main.cs" />
      <Compile Include="Assets\Scripts\recipe.cs" />
+     <Compile Include="Assets\Scripts\recipeButton.cs" />
+     <Compile Include="Assets\Scripts\recipeViewer.cs" />
      <Compile Include="Assets\Scripts\recipesPanel.cs" />
+     <Compile Include="Assets\Scripts\rotateImage.cs" />
      <Compile Include="Assets\Scripts\searchIngredientsPanel.cs" />
      <Compile Include="Assets\Scripts\webParseTest.cs" />
+     <Compile Include="Assets\Scripts\webParseTesting.cs" />
      <Compile Include="Assets\Scripts\webParser.cs" />
      <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
      <None Include="Assets\Art\Palette.txt" />

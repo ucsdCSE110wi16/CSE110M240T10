@@ -442,7 +442,7 @@ namespace SimpleJSON
         
         public void SaveToFile(string aFileName)
         {
-            #if USE_FileIO
+            /*#if USE_FileIO
             System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
             using(var F = System.IO.File.OpenWrite(aFileName))
             {
@@ -450,7 +450,7 @@ namespace SimpleJSON
             }
             #else
             throw new Exception("Can't use File IO stuff in webplayer");
-            #endif
+            #endif*/
         }
         public string SaveToBase64()
         {

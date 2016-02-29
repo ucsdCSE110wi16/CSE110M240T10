@@ -9,13 +9,16 @@ public class webParseTest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(JSONClient.GetHTML(url,callback));
+        webParser.Instance.parse(url, callback);
 	}
 
-    public void callback(string response) {
-        recipe result = webParser.parse(url, response);
-        ingredients = result.ingredients.ToArray();
-        directions = result.directions;
-        name = result.name;
+    public void callback(recipe result, string url)
+    {
+        if (result != null)
+        {
+            ingredients = result.ingredients.ToArray();
+            directions = result.directions;
+            name = result.name;
+        }
     }
 }

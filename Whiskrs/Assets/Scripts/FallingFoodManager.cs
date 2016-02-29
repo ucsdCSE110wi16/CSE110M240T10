@@ -9,8 +9,9 @@ public class FallingFoodManager : MonoBehaviour {
     public Vector2[] foodItemVelocities;
     public Sprite[] foodImages;
     public const int FallingFoodCount = 10;
-    public static Vector2 MinVelocity = new Vector2(-3, -3);
-    public static Vector2 MaxVelocity = new Vector2(3, -7);
+    public const float ScalingReductionFactor = 5f;
+    public static Vector2 MinVelocity = new Vector2(-2, -1);
+    public static Vector2 MaxVelocity = new Vector2(2, -4);
     public Transform FoodParent;
 
     // Use this for initialization
@@ -33,8 +34,8 @@ public class FallingFoodManager : MonoBehaviour {
             Random.value * Screen.width,
             Screen.height + itemTransform.rect.height, 
             0);
-        fooditem.transform.localScale = new Vector3(Screen.width / itemTransform.rect.width / 5, 
-            Screen.width / itemTransform.rect.width / 5, 0);
+        fooditem.transform.localScale = new Vector3(Screen.width / itemTransform.rect.width / ScalingReductionFactor, 
+            Screen.width / itemTransform.rect.width / ScalingReductionFactor, 0);
         return fooditem;
     }
 

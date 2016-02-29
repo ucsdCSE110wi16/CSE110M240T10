@@ -21,7 +21,17 @@ public class SuperCook : MonoBehaviour{
     public void getRecipes(List<string> ingredients, superCookDelegate responseFunction)
     {
         this.ingredients = ingredients;
-        SuperCookRequest data = new SuperCookRequest(1, string.Join(",",ingredients.ToArray()), skip);
+        string cat = "";
+        if (main.Instance.cuisine != "")
+        {
+            cat += main.Instance.cuisine;
+            if (main.Instance.mealtype != "")
+                cat += "," + main.Instance.mealtype;
+        }
+        else if (main.Instance.mealtype != "")
+            cat += main.Instance.mealtype;
+
+        SuperCookRequest data = new SuperCookRequest(1, string.Join(",", ingredients.ToArray()), skip, cat, string.Join("", main.Instance.restrictions.ToArray()));
         JSONObject json = new JSONObject(data.ToString());
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Cookie", "myIngredients=" + WWW.EscapeURL(string.Join(",", ingredients.ToArray())));
@@ -61,13 +71,17 @@ public class SuperCook : MonoBehaviour{
         public int needsimage;
         public string kitchen;
         public int start;
-        public SuperCookRequest(int ni, string kit, int st) {
-            needsimage = ni; kitchen = kit; start = st;
+        public string kw;
+        public string focus;
+        public string catname;
+        public string exclude;
+        public SuperCookRequest(int ni, string kit, int st, string catname="", string exclude = "") {
+            needsimage = ni; kitchen = kit; start = st; this.catname = catname; this.exclude = exclude;
         }
         // custom json convertion
         public override string ToString()
         {
-            return "{\"needsimage\":" + needsimage + ",\"kitchen\":\"" + kitchen + "\",\"start\":" + start + "}";
+            return "{\"needsimage\":" + needsimage + ",\"kitchen\":\"" + kitchen + "\",\"catname\":\"" + catname + "\",\"exclude\":\"" + exclude + "\",\"start\":" + start + "}";
         }
     }
 }
@@ -87,4 +101,14 @@ public class SuperCookRecipe
     public string uses;
     public int id;
     public Texture2D img;
+}
+
+public class categories {
+    public static string[] meals = { "Breads", "Breakfast", "Cakes", "Casseroles", 
+                                       "Cookies", "Desserts", "Dinner", "Dips", "Drinks","Fish recipes","Grilling & BBQ","Kid Friendly",
+                                       "Meat recipes","Poultry recipes","Quick & Easy","Salad Dressings","Salads","Sandwiches","Sauces",
+                                       "Seafood recipes","Slow Cooker","Soups","Veggie recipes" };
+    public static string[] cuisines = {"Asian Caribbean","Chinese","French","German","Indian & Thai","Italian","Mediterranean",
+                                          "Mexican","Tex-Mex & Southwest"};
+    public static string[] restrictions = { "Poultry", "Nuts", "Meat", "Gluten", "Dairy", "Shellfish", "Fish" };
 }

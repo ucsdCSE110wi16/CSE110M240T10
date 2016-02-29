@@ -8,8 +8,10 @@ public class recipesPanel : MonoBehaviour
     public SuperCookResult result;
     public GameObject resultGrid;
     public static recipesPanel Instance { get; private set; }
-    private int index;
-    public int numToDisplay = 40;
+    private int index = 0;
+    public List<GameObject> recipeButtons;
+    public GameObject nextButton;
+    public GameObject prevButton;
 
     void Awake()
     {
@@ -17,7 +19,7 @@ public class recipesPanel : MonoBehaviour
     }
 
     public void display() {
-        if (main.Instance.ingredientsChanged)
+        if (main.Instance.ingredientsManager.ingredientsChanged)
             searchRecipes();
     }
 
@@ -25,15 +27,23 @@ public class recipesPanel : MonoBehaviour
     {
         foreach (Transform child in resultGrid.transform)
         {
-            GameObject.Destroy(child.gameObject);
+            child.gameObject.SetActive(false);
         }
     }
 
     private void searchRecipes()
     {
-        main.Instance.ingredientsChanged = false;
+        main.Instance.ingredientsManager.ingredientsChanged = false;
         clearGrid();
-        SuperCook.Instance.getRecipes(main.Instance.ingredients, callback);
+        if (main.Instance.ingredientsManager.selectedIngredients.Count > 0)
+        {
+            List<string> names = new List<string>();
+            foreach (ingredient i in main.Instance.ingredientsManager.selectedIngredients)
+            {
+                names.Add(i.name);
+            }
+            SuperCook.Instance.getRecipes(names, callback);
+        }
     }
 
     void callback(SuperCookResult result)
@@ -43,69 +53,46 @@ public class recipesPanel : MonoBehaviour
         draw();
     }
 
-    public void handleScroll(Vector2 change)
-    {
-        if (result != null)
-        {
-            if (change.y == 1 && index != 0)
-                drawPrevious();
-            else if (change.y == 0)
-                drawNext();
-        }
-    }
-
-    private void drawNext()
-    {
-        index += numToDisplay;
-        draw();
-    }
-
-    private void drawPrevious()
-    {
-        index = (index - numToDisplay > 0) ? (index - numToDisplay) : 0;
-        draw();
-    }
-
     private void draw()
     {
         if (result.results.Count > 0)
         {
-            foreach (SuperCookRecipe recipe in result.results)
+            for (int i=index;i<index+4;i++)
             {
-                string res = (main.Instance.isFavorite(recipe.id.ToString())) ? "RecipeButton 1" : "RecipeButton";
-                GameObject button = (GameObject)Instantiate(Resources.Load(res), Vector3.zero, Quaternion.identity);
-                Text txt = button.GetComponentInChildren<Text>();
-                RawImage img = button.GetComponentInChildren<RawImage>();
-                Toggle favButton = button.GetComponentInChildren<Toggle>();
-                txt.text = recipe.title;
-                Button b = button.GetComponent<Button>();
-                b.onClick.AddListener(delegate { openWebPage(recipe.url); });
-                favButton.onValueChanged.AddListener(delegate(bool val) {
-                    if (!val)
-                    {
-                        main.Instance.removeFavorite(recipe.id.ToString());
-                    }
-                    else
-                    {
-                        main.Instance.markAsFavorite(recipe.id.ToString());                        
-                    }
-                });
-                StartCoroutine(JSONClient.GetImage("http://www.supercook.com/thumbs/" + recipe.id + ".jpg", imageCallback, img));
-                button.transform.SetParent(resultGrid.transform);
-                RectTransform rt = resultGrid.GetComponent<RectTransform>();
-                rt.Translate(new Vector3(0, -211, 0));
+                SuperCookRecipe recipe = result.results[i];
+                GameObject button = recipeButtons[i - index];
+                button.SetActive(true);
+                button.GetComponent<recipeButton>().initialize(recipe);
             }
         }
     }
 
-    private void openWebPage(string url)
-    {
-        //StartCoroutine(JSONClient.Get(url, recipeCallback));
-        Application.OpenURL(url);
+    public void next() {
+        if (index + 4 < result.results.Count)
+        {
+            index += 4;
+            prevButton.SetActive(true);
+        }
+        else
+        {
+            index = result.results.Count - 1;
+            nextButton.SetActive(false);
+        }
+        draw();
     }
 
-    void imageCallback(Texture2D img, object place)
+    public void previous()
     {
-        ((RawImage)place).texture = img;
+        if (index - 4 >= 0)
+        {
+            index -= 4;
+            nextButton.SetActive(true);
+        }
+        else
+        {
+            index = 0;
+            prevButton.SetActive(false);
+        }
+        draw();
     }
 }
