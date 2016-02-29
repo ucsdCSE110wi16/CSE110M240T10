@@ -1,0 +1,26 @@
+Tests Descriptions
+
+Ingredient Interaction
+
+1. When an ingredient is mistyped, user should be able to quickly recover from errors
+2. Newest pantry listings should be up at the top, so that the user can constantly see the updates in his or her pantry
+3. Test that when 30 ingredients are added, none of them become hidden from the viewer’s site
+4. If a duplicate ingredient is added, the pantry should inform the user that the ingredient is already listed
+
+Favorites Interaction
+
+1. The user should see the most recently favorited items on the top of the screen, with the older items on the bottom
+2. Touching the star button to make it clear should eliminate that item from being in the favorites section, after prompting the user to insure they want that recipe to be removed.
+3. Insure long named recipes are still able to be read without getting cut off
+
+Individual Recipe Viewing
+
+1. The ingredients should all be listen and left aligned, no ingredients should be cut off or hidden from view
+2. A picture of the recipe should be properly displayed and clear enough so that the user has a physical representation of the food he or she would be making
+3. The meal preparation instructions are easy to read, and also left aligned.
+
+Filtering
+
+1. Filters work properly so that no user with an allergy or diet restriction is seeing foods he or she can’t eat.
+2. Filters reflect actual recipes, and don’t generate random recipes the user is not looking for (ex: gluten intolerance, so all the recipes that pop up are smoothies and salads)
+
