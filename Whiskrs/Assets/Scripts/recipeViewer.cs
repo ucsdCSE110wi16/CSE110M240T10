@@ -11,6 +11,7 @@ public class recipeViewer : MonoBehaviour {
     public int textSize = 77;
     public int imageSize = 330;
     int numLines = 0;
+    public GameObject panel;
 
     public void toTop()
     {
@@ -27,7 +28,9 @@ public class recipeViewer : MonoBehaviour {
         imageObject.sprite = Sprite.Create(img, new Rect(0,0,img.width,img.height),new Vector2(0.5f,0.5f));
     }
 
-    public void draw(recipe result) {
+    public void draw(recipe result)
+    {
+        main.Instance.openPanel(panel);
         if (result.img != null) setImage(result.img);
         numLines = 0;
         recipeInstructions.text = "";

@@ -21,6 +21,7 @@ public class main : MonoBehaviour
     public string mealtype;
     public List<string> restrictions;
     public Dropdown cuisineSelector;
+    public Dropdown mealSelector;
 
     void Awake()
     {
@@ -66,10 +67,6 @@ public class main : MonoBehaviour
     }
 
     private void loadCategories() {
-        foreach (string s in categories.meals)
-        {
-            newCategoryButton(s, mealGrid, "meals");
-        }
         foreach (string s in categories.restrictions)
         {
             newCategoryButton(s, restrictionGrid, "restrictions");
@@ -78,7 +75,13 @@ public class main : MonoBehaviour
 
     public void cuisineDropDownChanged() {
         main.Instance.cuisine = cuisineSelector.captionText.text;
-        if (main.Instance.cuisine == "All") main.Instance.cuisine = "";
+        if (main.Instance.cuisine == "All Cuisines") main.Instance.cuisine = "";
+    }
+
+    public void mealDropDownChanged()
+    {
+        main.Instance.mealtype = mealSelector.captionText.text;
+        if (main.Instance.mealtype == "All Meals") main.Instance.mealtype = "";
     }
 
     private void newCategoryButton(string s, GameObject grid, string category) {
@@ -86,13 +89,13 @@ public class main : MonoBehaviour
         button.GetComponent<categoryButton>().initialize(s, category);
         button.transform.SetParent(grid.transform);
         button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        shiftGridHorizontally(grid, 250);
+        shiftGridVertically(grid, 250);
     }
 
-    private void shiftGridHorizontally(GameObject grid, int amount)
+    private void shiftGridVertically(GameObject grid, int amount)
     {
         RectTransform rt = grid.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(rt.sizeDelta.x + amount, rt.sizeDelta.y);
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + amount);
     }
 
     public bool isFavorite(string id)

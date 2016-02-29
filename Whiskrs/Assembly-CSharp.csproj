@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\recipeButton.cs" />
      <Compile Include="Assets\Scripts\recipeViewer.cs" />
      <Compile Include="Assets\Scripts\recipesPanel.cs" />
+     <Compile Include="Assets\Scripts\rotateImage.cs" />
      <Compile Include="Assets\Scripts\searchIngredientsPanel.cs" />
      <Compile Include="Assets\Scripts\webParseTest.cs" />
      <Compile Include="Assets\Scripts\webParseTesting.cs" />
