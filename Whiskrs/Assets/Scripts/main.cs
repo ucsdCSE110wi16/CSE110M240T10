@@ -7,10 +7,9 @@ public class main : MonoBehaviour
 {
     public static main Instance { get; private set; }
     public IngredientsManager ingredientsManager;
+    public AudioClip panelClose;
     public GameObject myIngredientsGrid;
     public GameObject filterPanel;
-    public GameObject cuisineGrid;
-    public GameObject mealGrid;
     public GameObject restrictionGrid;
     public delegate void recipeLoaded(List<ingredient> ingredients, string directions);
     public string[] favorites;
@@ -127,6 +126,7 @@ public class main : MonoBehaviour
 
     public void openPanel(GameObject panel)
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(panelClose);
         panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 
