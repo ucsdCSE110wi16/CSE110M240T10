@@ -21,9 +21,14 @@ public class main : MonoBehaviour
     public List<string> restrictions;
     public Dropdown cuisineSelector;
     public Dropdown mealSelector;
+    public bool clearPrefs = false;
+    public GameObject tutorialPanel;
 
     void Awake()
     {
+        if (clearPrefs) {
+            PlayerPrefs.SetString("hasUsed", "");
+        }
         if (!firstStart)
         {
             firstStart = true;
@@ -43,6 +48,11 @@ public class main : MonoBehaviour
             }
             loadCategories();
         }
+        if (PlayerPrefs.GetString("hasUsed") == "")
+        {
+            tutorialPanel.SetActive(true);
+        }
+        PlayerPrefs.SetString("hasUsed", "hasUsed");
     }
 
     public void ingredientsChanged() {
