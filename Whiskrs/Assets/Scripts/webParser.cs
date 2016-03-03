@@ -63,14 +63,20 @@ public class webParser : MonoBehaviour{
                 case "www.wegmans.com":
                     result = parseWegmans(html);
                     break;
-                /*case "www.rachaelraymag.com":
+                case "www.rachaelraymag.com":
                     result = parseRachaelRay(html);
                     break;
-                case "www.traderjoes.com":
+                /*case "www.traderjoes.com":
                     result = parseTraderJoes(html);
                     break;*/
                 case "www.cookstr.com":
                     result = parseCookstr(html);
+                    break;
+                /*case "www.thepioneerwoman.com":
+                    result = parsePioneer(html);
+                    break;*/
+                case "www.chatelaine.com":
+                    result = parseChatelaine(html);
                     break;
 
             }
@@ -83,27 +89,30 @@ public class webParser : MonoBehaviour{
         }
     }
 
-    /*//parse raychaelraymag.com
+    //parse raychaelraymag.com
     private static recipe parseRachaelRay(string html)
     {
-        string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "fn")[0]);
         string instructions = removeTags(getElementsByAttr(html, "div", "class", "recipe-instructions")[0]);
         List<string> ingredients = new List<string>();
-        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "recipe-instructions"))
+        foreach (string ing in getElementsByAttr(html, "span", "class", "name"))
         {
-            ingredients.Add(removeTags(ing));
+            String myS = removeTags(ing);
+            char[] trimmer = { '<', '/', ' ', 's', 'p', 'a', 'n', ' ' };
+            String s = myS.TrimEnd(trimmer);
+            ingredients.Add(s);
         }
 
         return new recipe(name, ingredients, instructions, null);
     }
 
-    //parse traderjoes.com
+    /*//parse traderjoes.com
     private static recipe parseTraderJoes(string html)
     {
-        string name = removeTags(getElementsByAttr(html, "div", "itemprop", "name")[0]);
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "lead mt-m10 mb-m5")[0]);
         string directions = removeTags(getElementsByAttr(html, "div", "class", "article")[0]);
         List<string> ingredients = new List<string>();
-        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "bullet-list"))
+        foreach (string ing in getElementsByAttr(html, "u1", "class", "bullet-list"))
         {
             ingredients.Add(removeTags(ing));
         }
@@ -123,7 +132,33 @@ public class webParser : MonoBehaviour{
         }
         return new recipe(name, ingredients, directions, null);
     }
-    
+
+    //parse chatelaine.com
+    private static recipe parseChatelaine(string html)
+    {
+        string name = removeTags(getElementsByAttr(html, "h1", "class", "postTitle")[0]);
+        string directions = removeTags(getElementsByAttr(html, "div", "itemprop", "recipeInstructions")[0]);
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "div", "class", "recipe_ingredient_text"))
+        {
+            ingredients.Add(removeTags(ing));
+        }
+        return new recipe(name, ingredients, directions, null);
+    }
+
+    /*//parse thepioneerwoman.com
+    private static recipe parsePioneer(string html)
+    {
+        string name = removeTags(getElementsByAttr(html, "div", "class", "recipe-title")[0]);
+        string directions = removeTags(getElementsByAttr(html, "div", "class", "panel-body")[0]);
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "name"))
+        {
+            ingredients.Add(removeTags(ing));
+        }
+        return new recipe(name, ingredients, directions, null);
+    }*/
+
 
     private static recipe parseMartha(string html)
     {
