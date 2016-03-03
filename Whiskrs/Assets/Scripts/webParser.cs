@@ -78,6 +78,9 @@ public class webParser : MonoBehaviour{
                 case "www.chatelaine.com":
                     result = parseChatelaine(html);
                     break;
+                case "www.eatingwell.com":
+                    result = parseEatingWell(html);
+                    break;
 
             }
             result.url = url;
@@ -88,6 +91,23 @@ public class webParser : MonoBehaviour{
             webParser.Instance.func(null, url);
         }
     }
+    //parse eatingwell.com
+    private static recipe parseEatingWell(string html)
+    {
+        string name = removeTags(getElementsByAttr(html, "h1", "itemprop", "name")[0]);
+        string instructions = removeTags(getElementsByAttr(html, "div", "itemprop", "recipeinstructions")[0]);
+
+        List<string> ingredients = new List<string>();
+        foreach (string ing in getElementsByAttr(html, "li", "itemprop", "ingredients"))
+        {
+            String myS = removeTags(ing);
+            ingredients.Add(myS);
+        }
+
+        return new recipe(name, ingredients, instructions, null);
+    }
+
+
 
     //parse raychaelraymag.com
     private static recipe parseRachaelRay(string html)
