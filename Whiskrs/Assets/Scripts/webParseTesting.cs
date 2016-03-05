@@ -61,6 +61,20 @@ public class webParseTesting : MonoBehaviour {
         return tester (testUrl, realName, realIng, realDir);
     }
 
+    public bool foodNetworkTester() {
+        // Call the tester on foodnetwork.com
+        string testUrl = "http://www.foodnetwork.com/recipes/a-bowl-of-gluten-free-oatmeal-recipe.html";
+        string realName = "A Bowl of Gluten-Free Oatmeal";
+        string[] realIng = { "1 cup whole milk", "1 cup water", "1/2 teaspoon kosher salt", "1 teaspoon vanilla extract", "1 cup whole rolled gluten-free oats" };
+        string realDir = "Set a saucepan over high heat. Pour in the milk and water. Add the salt and vanilla extract. Bring the liquids to a boil.\n\n" +
+                         "When the milky water is boiling, pour in the oats. Stir quite vigorously. When the water returns to a boil, turn down the heat to low. Simmer the oats, stirring every few minutes, until the oats are creamy and plump, the liquid fully absorbed, about 15 minutes.\n\n" +
+                         "Turn off the heat and cover the pan. Let the oatmeal sit for five minutes to fully absorb the liquid.\n\n" +
+                         "Top with your favorite sweetener and fruit. (This one is maple syrup, peaches, and blackberries.)\n\n" +
+                         "Variations: If you cannot eat dairy, almond milk or hemp milk work well here too.\n\n" +
+                         "If you have a fresh vanilla bean, scrape the insides of it into the pot instead of vanilla extract. This will be the best oatmeal you have ever eaten.\n\n";
+        return tester (testUrl, realName, realIng, realDir);
+    }
+
     public bool epicuriousTester() {
         // Call the tester on Epicurious
         string testUrl = "http://www.epicurious.com/recipes/food/views/muffuletta-sandwich-240766";
