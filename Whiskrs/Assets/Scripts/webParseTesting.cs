@@ -42,15 +42,24 @@ public class webParseTesting : MonoBehaviour {
         return tester (testUrl, realName, realIng, realDir);
     }
 
+    public bool allRecipesTester() {
+        // Call the tester on allrecipes.com
+        string testUrl = "http://allrecipes.com/recipe/21174/bbq-pork-for-sandwiches/";
+        string realName = "BBQ Pork for Sandwiches";
+        string[] realIng = {"1 (14 ounce) can beef broth", "3 pounds boneless pork ribs", "1 (18 ounce) bottle barbeque sauce" };
+        string realDir = "Pour can of beef broth into slow cooker, and add boneless pork ribs. Cook on High heat for 4 hours, or until meat shreds easily. Remove meat, and shred with two forks. It will seem that it&#39;s not working right away, but it will. Preheat oven to 350 degrees F (175 degrees C). Transfer the shredded pork to a Dutch oven or iron skillet, and stir in barbeque sauce. Bake in the preheated oven for 30 minutes, or until heated through.";
+        return tester (testUrl, realName, realIng, realDir);
+    }
+
     public bool epicuriousTester() {
         // Call the tester on Epicurious
         string testUrl = "http://www.epicurious.com/recipes/food/views/muffuletta-sandwich-240766";
         string realName = "Muffuletta Sandwich";
         string[] realIng = { "1 cup each pitted green and black olives, coarsely chopped", "1 tablespoon tiny capers", "1/3 cup diced (1/4 inch) roasted red bell pepper", "1/4 cup diced (1/4 inch) celery, with leaves",
             "2 tablespoons chopped flat-leaf parsley", "2 teaspoons finely minced garlic", "2 tablespoons red-wine vinegar", "2 tablespoons olive oil", "Salt and pepper, to taste" };
-        string realDir = "1. Prepare the Olive Salad ahead of time: Combine all the ingredients and set aside in the refrigerator for 4 hours or longer. \n\n" +
+        string realDir = "1. Prepare the Olive Salad ahead of time: Combine all the ingredients and set aside in the refrigerator for 4 hours or longer.\n\n" +
             "2. Assemble the sandwich: Spread half of the Olive Salad on the bottom half of the bread. Layer with salami, provolone and mortadella, then top with the remaining Olive Salad. Cover with the top of the bread, press down and let stand for 10 to 15 minutes. Wrap the sandwich in plastic wrap and let stand for 1 hour.\n\n" +
-            "3. Unwrap, cut into 6 wedges using a serrated knife, then wrap them for the road. Be sure to hollow out the bread so the salad can fit inside. Doing so also cuts carbs and calories. \n\n";
+            "3. Unwrap, cut into 6 wedges using a serrated knife, then wrap them for the road. Be sure to hollow out the bread so the salad can fit inside. Doing so also cuts carbs and calories.\n\n";
         return tester (testUrl, realName, realIng, realDir);
     }
 
