@@ -42,7 +42,17 @@ public class webParseTesting : MonoBehaviour {
         return tester (testUrl, realName, realIng, realDir);
     }
 
-
+    public bool epicuriousTester() {
+        // Call the tester on Epicurious
+        string testUrl = "http://www.epicurious.com/recipes/food/views/muffuletta-sandwich-240766";
+        string realName = "Muffuletta Sandwich";
+        string[] realIng = { "1 cup each pitted green and black olives, coarsely chopped", "1 tablespoon tiny capers", "1/3 cup diced (1/4 inch) roasted red bell pepper", "1/4 cup diced (1/4 inch) celery, with leaves",
+            "2 tablespoons chopped flat-leaf parsley", "2 teaspoons finely minced garlic", "2 tablespoons red-wine vinegar", "2 tablespoons olive oil", "Salt and pepper, to taste" };
+        string realDir = "1. Prepare the Olive Salad ahead of time: Combine all the ingredients and set aside in the refrigerator for 4 hours or longer. \n\n" +
+            "2. Assemble the sandwich: Spread half of the Olive Salad on the bottom half of the bread. Layer with salami, provolone and mortadella, then top with the remaining Olive Salad. Cover with the top of the bread, press down and let stand for 10 to 15 minutes. Wrap the sandwich in plastic wrap and let stand for 1 hour.\n\n" +
+            "3. Unwrap, cut into 6 wedges using a serrated knife, then wrap them for the road. Be sure to hollow out the bread so the salad can fit inside. Doing so also cuts carbs and calories. \n\n";
+        return tester (testUrl, realName, realIng, realDir);
+    }
 
 
 
