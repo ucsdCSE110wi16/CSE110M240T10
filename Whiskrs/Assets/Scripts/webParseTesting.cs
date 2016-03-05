@@ -46,8 +46,18 @@ public class webParseTesting : MonoBehaviour {
         // Call the tester on allrecipes.com
         string testUrl = "http://allrecipes.com/recipe/21174/bbq-pork-for-sandwiches/";
         string realName = "BBQ Pork for Sandwiches";
-        string[] realIng = {"1 (14 ounce) can beef broth", "3 pounds boneless pork ribs", "1 (18 ounce) bottle barbeque sauce" };
+        string[] realIng = { "1 (14 ounce) can beef broth", "3 pounds boneless pork ribs", "1 (18 ounce) bottle barbeque sauce" };
         string realDir = "Pour can of beef broth into slow cooker, and add boneless pork ribs. Cook on High heat for 4 hours, or until meat shreds easily. Remove meat, and shred with two forks. It will seem that it&#39;s not working right away, but it will. Preheat oven to 350 degrees F (175 degrees C). Transfer the shredded pork to a Dutch oven or iron skillet, and stir in barbeque sauce. Bake in the preheated oven for 30 minutes, or until heated through.";
+        return tester (testUrl, realName, realIng, realDir);
+    }
+
+    public bool marthaStewartTester() {
+        // Call the tester on marthastewart.com
+        string testUrl = "http://www.marthastewart.com/925229/chicken-mushrooms";
+        string realName = "Chicken with Mushrooms";
+        string[] realIng = { "1/4 cup all-purpose flour", "1 1/2 pounds chicken cutlets", "Salt and pepper", "1 tablespoon olive oil", "3 tablespoons unsalted butter, divided", "2 tablespoons fresh thyme leaves, chopped",
+            "1 pound button mushrooms, trimmed and quartered", "1/4 cup dry white wine", "1/4 cup chicken broth", "1/4 cup chopped fresh parsley" };
+        string realDir = "Place flour in a shallow dish. Season chicken with salt and pepper, then coat with flour, shaking off excess.\nIn a large skillet, heat oil and 1 tablespoon butter over medium-high. In batches, cook chicken until browned and cooked through, about 3 minutes per side. Transfer to a plate and tent loosely with foil.\nReduce heat to medium, add thyme, mushrooms, and remaining 2 tablespoons butter, and cook until softened, 6 minutes.\nAdd wine and broth and cook, stirring, until reduced by half, 3 minutes. Season with salt and pepper. Return chicken to pan along with any accumulated juices; top with parsley.";
         return tester (testUrl, realName, realIng, realDir);
     }
 
@@ -62,8 +72,6 @@ public class webParseTesting : MonoBehaviour {
             "3. Unwrap, cut into 6 wedges using a serrated knife, then wrap them for the road. Be sure to hollow out the bread so the salad can fit inside. Doing so also cuts carbs and calories.\n\n";
         return tester (testUrl, realName, realIng, realDir);
     }
-
-
 
     public void callback(recipe result, string url)
     {
