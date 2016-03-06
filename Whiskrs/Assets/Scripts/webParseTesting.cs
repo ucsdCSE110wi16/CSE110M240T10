@@ -87,6 +87,18 @@ public class webParseTesting : MonoBehaviour {
         return tester (testUrl, realName, realIng, realDir);
     }
 
+    public bool delishTester() {
+        return false;
+        // Call the tester on Delish
+        string testUrl = "http://www.delish.com/cooking/recipe-ideas/recipes/a46245/churro-waffles-recipe/";
+        string realName = "Churro Waffles";
+        string[] realIng = { "Prepared waffle batter", "Melted butter, for brushing", "1/4 c. sugar", "2 tbsp. ground cinnamon", "Dulce de leche, for drizzling" };
+        string realDir = "Prepare waffle batter and cook in waffle maker.\n\n" +
+            "Transfer to a cutting board and brush with melted butter. In a shallow dish, combine sugar and cinnamon. Dunk waffle in cinnamon sugar.\n\n" +
+            "Drizzle in dulce de leche and cut into triangles and serve.\n\n";
+        return tester (testUrl, realName, realIng, realDir);
+    }
+
     public void callback(recipe result, string url)
     {
         if( result != null)
