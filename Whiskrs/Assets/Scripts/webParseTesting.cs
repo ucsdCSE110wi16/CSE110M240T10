@@ -96,7 +96,17 @@ public class webParseTesting : MonoBehaviour {
             "Transfer to a cutting board and brush with melted butter. In a shallow dish, combine sugar and cinnamon. Dunk waffle in cinnamon sugar.\n\n" +
             "Drizzle in dulce de leche and cut into triangles and serve.\n\n";
         return tester (testUrl, realName, realIng, realDir);
-    }        
+    }
+
+    public bool wegmansTester() {
+        // Call the tester on Wegmans
+        string testUrl = "http://www.wegmans.com/webapp/wcs/stores/servlet/ProductDisplay?langId=-1&storeId=10052&catalogId=10002&productId=723033";
+        string realName = "Arugula Salad";
+        string[] realIng = { "Juice of 1/2  lemon (about 1 1/2 Tbsp)", "1 Tbsp  Italian Classics Tuscan White Wine Vinegar", "1/4 cup  Italian Classics Toscano Extra Virgin Olive Oil", "1 container (5 oz)  Wegmans Organic Baby Arugula",
+            "Salt and pepper to taste", "Italian Classics Parmigiano Reggiano (Cheese Shop), shaved, for garnish" };
+        string realDir = "Add lemon juice, vinegar, and olive oil to large bowl; whisk to combine. Add arugula to bowl; toss to combine. Season with salt and pepper; garnish with cheese shavings.\n\n";
+        return tester (testUrl, realName, realIng, realDir);
+    }
 
     public void callback(recipe result, string url)
     {
