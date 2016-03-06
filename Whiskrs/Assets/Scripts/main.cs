@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class main : MonoBehaviour
 {
@@ -73,6 +74,11 @@ public class main : MonoBehaviour
         favoriteRecipes.Remove("{" + id + ";" + url + ";" + title + "}");
         favoritesPanel.Instance.removeFavorite(id);
         PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
+    }
+
+    public void loadEasterEggScene()
+    {
+        SceneManager.LoadScene("EasterEgg");
     }
 
     private void loadCategories() {
