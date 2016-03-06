@@ -88,7 +88,6 @@ public class webParseTesting : MonoBehaviour {
     }
 
     public bool delishTester() {
-        return false;
         // Call the tester on Delish
         string testUrl = "http://www.delish.com/cooking/recipe-ideas/recipes/a46245/churro-waffles-recipe/";
         string realName = "Churro Waffles";
@@ -97,7 +96,7 @@ public class webParseTesting : MonoBehaviour {
             "Transfer to a cutting board and brush with melted butter. In a shallow dish, combine sugar and cinnamon. Dunk waffle in cinnamon sugar.\n\n" +
             "Drizzle in dulce de leche and cut into triangles and serve.\n\n";
         return tester (testUrl, realName, realIng, realDir);
-    }
+    }        
 
     public void callback(recipe result, string url)
     {
