@@ -47,6 +47,7 @@ public class recipeViewer : MonoBehaviour {
         addNewLine();
         addLine("Source: " + result.url);
         toTop();
+        toTop();
     }
 
     private void addLine(string text) {

@@ -37,6 +37,7 @@ public class main : MonoBehaviour
             ingredientsManager = new IngredientsManager(myIngredientsGrid);
             favoriteRecipes = new List<string>();
 
+            Debug.Log(PlayerPrefs.GetString("favorites"));
             favorites = PlayerPrefs.GetString("favorites").Split(',');
             foreach (string s in favorites)
             {
@@ -61,10 +62,11 @@ public class main : MonoBehaviour
     }
 
     public void markAsFavorite(string id, string url, string title) {
-        if (!favoriteRecipes.Contains(id))
+        if (!isFavorite(id))
         {
             favoriteRecipes.Add("{" + id + ";" + url + ";" + title.Replace(",","") + "}");
             favoritesPanel.Instance.drawFavorite(url, id, title);
+            PlayerPrefs.SetString("favorites", "");
             PlayerPrefs.SetString("favorites", string.Join(",", favoriteRecipes.ToArray()));
         }
     }
