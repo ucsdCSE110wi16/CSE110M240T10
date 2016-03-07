@@ -71,7 +71,7 @@
      <Compile Include="Assets\scenarioProgram.cs" />
      <Compile Include="Assets\testObjects.cs" />
      <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
-     <None Include="Assets\Scripts\Art\Palette.txt" />
+     <None Include="Assets\Art\Palette.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
