@@ -70,9 +70,8 @@
      <Compile Include="Assets\Scripts\webParser.cs" />
      <Compile Include="Assets\scenarioProgram.cs" />
      <Compile Include="Assets\testObjects.cs" />
-     <Compile Include="Assets\unitTests.cs" />
      <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
-     <None Include="Assets\Art\Palette.txt" />
+     <None Include="Assets\Scripts\Art\Palette.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -3,6 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+/**************************************************
+ * This is the main testing framework for Whiskr
+ * 
+ * Scenario Testing:
+ * Several key panel change button scenarios are tested
+ * 
+ * Unit Testing:
+ * Adding ingredients
+ * Removing ingredients
+ * Parsing multiple websites
+ **************************************************/
 
 public class scenarioProgram : MonoBehaviour {
     /* Similar to assertEquals */
@@ -20,11 +31,20 @@ public class scenarioProgram : MonoBehaviour {
     public bool recipesButtonTest = false;
     public bool homeButtonFromRecipesTest = false;
 
+    public bool addIngredientTest = false;
+    public bool removeIngredientTest = false;
+
+    /* Parsing Tests */
+    public List<string> websitesParsed;
+    private List<expectedOutcome> websiteParsingFunctions;
+    private static int testIndex = -1;
+
 	/* Set the singleton for testing and feedback, make sure the game object stays around
      * Load the app
      * Set to run tests */
 	void Start () {
         e = this;
+        websitesParsed = new List<string>();
         Object.DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("Scene");
         testObjects.runTests = true;
@@ -34,7 +54,15 @@ public class scenarioProgram : MonoBehaviour {
      * General template:
      *      test(boolean function to test, success message, error message)
      */
-    public static void runTest(){         
+    public static void runTest()
+    {
+        e.websiteParsingFunctions = new List<expectedOutcome>();
+        e.websiteParsingFunctions.Add(webParseTesting.Instance.foodTester);
+        e.websiteParsingFunctions.Add(webParseTesting.Instance.marthaStewartTester);
+        e.websiteParsingFunctions.Add(webParseTesting.Instance.foodNetworkTester);
+        e.websiteParsingFunctions.Add(webParseTesting.Instance.epicuriousTester);
+        e.websiteParsingFunctions.Add(webParseTesting.Instance.delishTester);
+        e.websiteParsingFunctions.Add(webParseTesting.Instance.wegmansTester);
         writeMessage("Testing Pantry Button...");
         test(
             delegate{
@@ -74,7 +102,28 @@ public class scenarioProgram : MonoBehaviour {
                 });
             }
         , "Home Button closes Recipes", "Home button from Recipes unsuccessful");
+
+        /* Running unit tests */
+        ingredient testIngredient = new ingredient("Test Ingredient");
+        main.Instance.ingredientsManager.addIngredient(testIngredient);
+        foreach (ingredient i in main.Instance.ingredientsManager.ingredients)
+        {
+            if (i.name == "Test Ingredient")
+            {
+                e.addIngredientTest = true;
+                break;
+            }
+        }
+        e.removeIngredientTest = main.Instance.ingredientsManager.removeIngredient(testIngredient);
+        runNextWebParsingTests();
 	}
+
+    public static void runNextWebParsingTests()
+    {
+        if (testIndex < e.websiteParsingFunctions.Count - 1) {
+            e.websiteParsingFunctions[++testIndex]();
+        }
+    }
 
     /* Prints results of test, may need to also write to text file */
     private static void writeMessage(string message)

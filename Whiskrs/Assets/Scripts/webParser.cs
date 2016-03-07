@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 public class webParser : MonoBehaviour{
     public static webParser Instance;
     public delegate void recipeLoaded(recipe result, string url);
-    private recipeLoaded func;
+    public recipeLoaded func;
 
     public void Awake(){
         Instance = this;
@@ -84,6 +84,7 @@ public class webParser : MonoBehaviour{
 
             }
             result.url = url;
+            if (result.name.IndexOf('<') > -1) result.name = result.name.Split('<')[0];
             webParser.Instance.func(result, url);
         }
         catch
@@ -536,7 +537,7 @@ public class webParser : MonoBehaviour{
     /*
      * Returns the Base URL ex. www.github.com
      */
-    private static string getURLBase(string url)
+    public static string getURLBase(string url)
     {
         string[] urlSplit = url.Split(new string[] { "://" }, StringSplitOptions.None);
         return urlSplit[1].Split('/')[0];

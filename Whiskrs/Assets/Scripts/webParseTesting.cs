@@ -1,25 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using System.Collections.Generic;
 
 public class webParseTesting : MonoBehaviour {
-    public string url;
-    public string[] ingredients;
-    public string directions;
-    public string name;
+    public static webParseTesting Instance;
+    public recipe expected;
 
-    // Use this for initialization
     void Start() {
-        webParser.Instance.parse(url, callback);
+        Instance = this;
     }
 
     private bool tester(string testUrl, string realName, string[] realIng, string realDir) {
+        expected = new recipe(realName, new List<string>(realIng), realDir, null);
         // Parse the website
-        url = testUrl;
-        Start ();
-
-        // Return whether everything matches up
-        return name.Equals(realName) && ingredients.SequenceEqual(realIng) && directions.Equals(realDir);
+        webParser.Instance.parse(testUrl, callback);
+        return true;
     }
 
     public bool foodTester()
@@ -108,29 +104,24 @@ public class webParseTesting : MonoBehaviour {
         return tester (testUrl, realName, realIng, realDir);
     }
 
-    public void callback(recipe result, string url)
-    {
-        if( result != null)
-        {
-            ingredients = result.ingredients.ToArray();
-            directions = result.directions;
-            name = result.name;
+    public void callback(recipe r, string url){
+        if (expected == null) {
+            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Failed");
+            scenarioProgram.runNextWebParsingTests();
+            return; 
         }
+        if (r == null)
+        {
+            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Website is necessary");
+            scenarioProgram.runNextWebParsingTests();
+            return; 
+        }
+        if(r.name.IndexOf(expected.name) > -1)
+            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Succeeded");
+        else
+        {
+            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Names do not match");
+        }
+        scenarioProgram.runNextWebParsingTests();
     }
- 
-    string Awake()
-    {
-        bool myRecipes = myRecipesTester();
-        bool food = foodTester();
-
-        if (myRecipes == false)
-            return "myRecipes failed";
-        if (food == false)
-            return "food.com failed";
-
-        return "All webParse Tests Pass";
-
-    }
-
-
 }

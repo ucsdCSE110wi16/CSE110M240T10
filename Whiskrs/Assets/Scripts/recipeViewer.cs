@@ -16,7 +16,7 @@ public class recipeViewer : MonoBehaviour {
     public void toTop()
     {
         scrollPanel.sizeDelta = new Vector2(scrollPanel.sizeDelta.x, textSize * numLines + imageSize);
-        scrollPanel.position = new Vector2(scrollPanel.position.x, Screen.height);
+        scrollPanel.position = new Vector2(scrollPanel.position.x, 0);
     }
 
     void Awake()

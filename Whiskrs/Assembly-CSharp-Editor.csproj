@@ -47,7 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\JSONClient\JSON\Editor\JSONChecker.cs" />
      <None Include="Assets\Scripts\JSONClient\JSON\readme.txt" />
-     <None Include="Assets\Art\Palette.txt" />
+     <None Include="Assets\Scripts\Art\Palette.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
