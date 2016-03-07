@@ -104,8 +104,10 @@ public class scenarioProgram : MonoBehaviour {
         , "Home Button closes Recipes", "Home button from Recipes unsuccessful");
 
         /* Running unit tests */
+        writeMessage("Testing Ingredients Manager...");
         ingredient testIngredient = new ingredient("Test Ingredient");
         main.Instance.ingredientsManager.addIngredient(testIngredient);
+
         foreach (ingredient i in main.Instance.ingredientsManager.ingredients)
         {
             if (i.name == "Test Ingredient")
@@ -114,7 +116,48 @@ public class scenarioProgram : MonoBehaviour {
                 break;
             }
         }
+        // Test has ingredient method to what was found
+        if (main.Instance.ingredientsManager.hasIngredient(testIngredient))
+        {
+            if (e.addIngredientTest)
+                writeMessage("Ingredient was added and was successfully found using hasIngredient");
+            else
+                writeMessage("Ingredient was not added to list but was successfully found using hasIngredient");
+        }
+        else
+        {
+            if (e.addIngredientTest)
+                writeMessage("Ingredient was added but was not successfully found using hasIngredient");
+            else
+                writeMessage("Ingredient was not added to list and was not successfully found using hasIngredient");
+        }
+        // Removing item from defaultly selected ingredient
+        main.Instance.ingredientsManager.selectedIngredients.Remove(testIngredient);
+
+        // Test selecting ingredients
+        main.Instance.ingredientsManager.selectIngredient(testIngredient);
+        if (main.Instance.ingredientsManager.selectedIngredients.Contains(testIngredient))
+        {
+            writeMessage("Ingredient successfully selected and added to list of selected ingredients");
+
+            // Test deselecting ingredients if selecting ingredients worked
+            main.Instance.ingredientsManager.deselectIngredient(testIngredient);
+            if (main.Instance.ingredientsManager.selectedIngredients.Remove(testIngredient))
+                writeMessage("Ingredient not successfully deselected and not removed from list of selected ingredients");
+            else
+                writeMessage("Ingredient successfully deselected and removed from list of selected ingredients");
+        }
+        else
+            writeMessage("Ingredient not successfully selected");
+
+        // Test removing ingredient
         e.removeIngredientTest = main.Instance.ingredientsManager.removeIngredient(testIngredient);
+        if (e.removeIngredientTest)
+            writeMessage("Ingredient successfully removed from ingredients");
+        else
+            writeMessage("Ingredient was not successfully removed from ingredients");
+
+
         runNextWebParsingTests();
 	}
 

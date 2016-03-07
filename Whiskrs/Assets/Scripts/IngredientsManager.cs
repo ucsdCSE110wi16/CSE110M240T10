@@ -78,9 +78,12 @@ public class IngredientsManager {
 
     public void selectIngredient(ingredient ing)
     {
-        selectedIngredients.Add(ing);
-        ing.checkMark.SetActive(true);
-        ingredientsChanged = true;
+        if (!selectedIngredients.Contains(ing))
+        {
+            selectedIngredients.Add(ing);
+            ing.checkMark.SetActive(true);
+            ingredientsChanged = true;
+        }
     }
 
     public void deselectIngredient(ingredient ing)

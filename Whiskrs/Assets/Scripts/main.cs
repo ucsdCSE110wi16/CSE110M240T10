@@ -142,7 +142,8 @@ public class main : MonoBehaviour
 
     public void openPanel(GameObject panel)
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(panelClose);
+        if(gameObject.GetComponent<AudioSource>().enabled)
+            gameObject.GetComponent<AudioSource>().PlayOneShot(panelClose);
         panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 
