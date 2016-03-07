@@ -100,7 +100,6 @@
     <Compile Include="Assets\Scripts\webParser.cs" />
     <Compile Include="Assets\scenarioProgram.cs" />
     <Compile Include="Assets\testObjects.cs" />
-    <Compile Include="Assets\unitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Palette.txt" />

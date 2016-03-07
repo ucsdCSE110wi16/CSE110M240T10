@@ -28,6 +28,46 @@ public class webParseTesting : MonoBehaviour {
         return tester (testUrl, realName, realIng, realDir);
     }
 
+    public bool chatelaineTester()
+    {
+        // Call the tester on chatelaine.com    
+        string testUrl = "http://www.chatelaine.com/recipe/world-cuisine-2/jerk-chicken-with-mango-slaw/";
+        string realName = "Jerk chicken with mango slaw";
+        string[] realIng = { "jalapenos,unseeded","small onion, sliced into quarters" , "lime juice ", "dried thyme", "soy sauce", "grated ginger", "allspice", "cinnamon", "canola oil", "salt", "chicken legs, about 2 kg", "ginger beer, or ginger ale", "Mango Slaw, see link below" };
+        string realDir = "WHIRL jalapeno with onion, lime juice, thyme, soy, ginger, allspice, cinnamon, oil and salt in a food processor until mixture is puréed." +
+            "TRIM and discard excess fat, then cut slashes in chicken.Transfer to slow cooker insert and coat with jalapeno mixture. Pour in ginger beer. Cover and cook until meat is tender, about 21 / 2 hours on high or 5 hours on low.Remove chicken to a platter.Strain sauce into a measuring cup." +
+            "PREHEAT barbecue to medium-high.Oil grill and barbecue chicken until skin is crisp, 3 min per side. Using 2 forks, shred chicken and skin. Stir 1 / 4 cup sauce with shredded chicken.Serve over rice or in toasted buns with Mango Slaw. Drizzle with more sauce, if desired.Meat and sauce will keep well, refrigerated, up to 3 days.";
+        return tester(testUrl, realName, realIng, realDir);
+    }
+
+
+    public bool eatingWellTester()
+    {
+        // Call the tester on eatingwell.com    
+        string testUrl = "http://www.eatingwell.com/recipes/peanut_tofu_cabbage_wraps.html";
+        string realName = "Peanut-Tofu Cabbage Wraps";
+        string[] realIng = {"8 small napa or Savoy cabbage leaves or 4 large, cut in half crosswise", "1 tablespoon canola oil", "1 14- to 16-ounce package extra-firm tofu, patted dry and crumbled,1/4 teaspoon salt","5 tablespoons prepared peanut sauce", "1 tablespoon rice vinegar", "1 1/2 teaspoons lime zest", "1 cup julienned Asian pear", "1 cup julienned English cucumber", "1/4 cup finely chopped cilantro"};
+        string realDir = "Wash and dry cabbage leaves well and cut out any tough ribs or stems." +
+        "Heat oil in a large nonstick skillet over medium-high heat.Add tofu, season with salt and cook, stirring often, until just golden brown, 4 to 6 minutes." +
+        "Meanwhile, whisk peanut sauce, vinegar and lime zest in a small bowl." +
+        "Remove the pan from the heat, add the sauce mixture and stir to combine.Serve the tofu in the cabbage leaves, topped with pear, cucumber and cilantro.";
+        return tester(testUrl, realName, realIng, realDir);
+    }
+
+    public bool rrTester()
+    {
+        // Call the tester on rachaelRaymag.com    
+        string testUrl = "http://www.rachaelraymag.com/recipe/hearty-chicken-soup/";
+        string realName = "Hearty Chicken Soup";
+        string[] realIng = { "low sodium chicken broth", "small carrots, peeled and thinly sliced", "celery, thinly sliced", "small onion, chopped", "shredded cooked chicken"};
+        string realDir = "In a large pot, bring broth, carrots, celery and onion to a boil. Simmer until vegetables are tender, 8 to 10 minutes.Add chicken and cook until warmed through, about 3 minutes; season with salt and pepper.Serve immediately or use as a base for the variations.";
+        return tester(testUrl, realName, realIng, realDir);
+    }
+
+
+
+
+
     public bool myRecipesTester()
     {
         // Call the tester on myrecipes.com
