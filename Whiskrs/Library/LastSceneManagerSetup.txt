@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenario_Testing.unity
+- path: Assets/EasterEgg.unity
   isLoaded: 1
   isActive: 1
