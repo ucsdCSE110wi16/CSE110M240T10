@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class webParseTesting : MonoBehaviour {
     public static webParseTesting Instance;
@@ -116,7 +117,8 @@ public class webParseTesting : MonoBehaviour {
         string testUrl = "http://www.epicurious.com/recipes/food/views/muffuletta-sandwich-240766";
         string realName = "Muffuletta Sandwich";
         string[] realIng = { "1 cup each pitted green and black olives, coarsely chopped", "1 tablespoon tiny capers", "1/3 cup diced (1/4 inch) roasted red bell pepper", "1/4 cup diced (1/4 inch) celery, with leaves",
-            "2 tablespoons chopped flat-leaf parsley", "2 teaspoons finely minced garlic", "2 tablespoons red-wine vinegar", "2 tablespoons olive oil", "Salt and pepper, to taste" };
+            "2 tablespoons chopped flat-leaf parsley", "2 teaspoons finely minced garlic", "2 tablespoons red-wine vinegar", "2 tablespoons olive oil", "Salt and pepper, to taste" , "1 round peasant bread (about 7 inches in diameter, 5 inches high), halved crosswise, insides pulled out", 
+            "4 ounces each thinly sliced Genoa salami and mortadella (found in the deli section)","4 ounces thinly sliced provolone cheese"};
         string realDir = "1. Prepare the Olive Salad ahead of time: Combine all the ingredients and set aside in the refrigerator for 4 hours or longer.\n\n" +
             "2. Assemble the sandwich: Spread half of the Olive Salad on the bottom half of the bread. Layer with salami, provolone and mortadella, then top with the remaining Olive Salad. Cover with the top of the bread, press down and let stand for 10 to 15 minutes. Wrap the sandwich in plastic wrap and let stand for 1 hour.\n\n" +
             "3. Unwrap, cut into 6 wedges using a serrated knife, then wrap them for the road. Be sure to hollow out the bread so the salad can fit inside. Doing so also cuts carbs and calories.\n\n";
@@ -147,20 +149,44 @@ public class webParseTesting : MonoBehaviour {
     public void callback(recipe r, string url){
         if (expected == null) {
             scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Failed");
-            scenarioProgram.runNextWebParsingTests();
-            return; 
         }
-        if (r == null)
+        else if (r == null)
         {
             scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Website is necessary");
-            scenarioProgram.runNextWebParsingTests();
-            return; 
         }
-        if(r.name.IndexOf(expected.name) > -1)
-            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Succeeded");
-        else
+        else if (r.name.IndexOf(expected.name) < 0)
         {
             scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Names do not match");
+        }
+        else if (Regex.Replace(r.directions.ToLower(), @"\s+", "") != Regex.Replace(expected.directions.ToLower(), @"\s+", ""))
+        {
+            Debug.Log(Regex.Replace(r.directions.ToLower(), @"\s+", "") + "," + Regex.Replace(expected.directions.ToLower(), @"\s+", ""));
+            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Directions do not match");
+        }
+        else if (r.ingredients.Count != expected.ingredients.Count)
+        {
+            scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Ingredient Count does not match");
+        }
+        else
+        {
+            bool passed = true;
+            for(int i=0;i<r.ingredients.Count;i++) {
+                string s1 = Regex.Replace(r.ingredients[i].ToLower(), @"\s+", "");
+                string s2 = Regex.Replace(expected.ingredients[i].ToLower(), @"\s+", "");
+                if (Regex.Replace(s1.ToLower(), @"\t|\n|\r", "") != Regex.Replace(s2.ToLower(), @"\t|\n|\r", "") && s1.IndexOf("&nbsp") < 0 && s2.IndexOf('/') < 0)
+                {
+                    Debug.Log(Regex.Replace(s1.ToLower(), @"\t|\n|\r", "") + ";" + Regex.Replace(s2.ToLower(), @"\t|\n|\r", ""));
+                    passed = false;
+                    break;
+                }
+            }
+            if (passed)
+                scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Succeeded");
+            else
+            {
+                Debug.Log(string.Join(",", r.ingredients.ToArray()) + ";" + string.Join(",", expected.ingredients.ToArray()));
+                scenarioProgram.e.websitesParsed.Add(webParser.getURLBase(url) + ": Ingredients do not match");
+            }
         }
         scenarioProgram.runNextWebParsingTests();
     }
