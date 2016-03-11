@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -391,9 +391,16 @@ public class webParser : MonoBehaviour{
         // Parse the directions
         string directionsHtml = getElementsByAttr(html, "div", "id", "directions")[0];
         string directions = "";
-        foreach (string dir in getElementsByTag(directionsHtml, "LI")) {
-            string direction = removeTags (dir);
-            directions += direction.Substring (0, direction.Length) + "\n\n";
+        if (getElementsByTag(directionsHtml, "LI").Count > 0)
+        {
+            foreach (string dir in getElementsByTag(directionsHtml, "LI"))
+            {
+                string direction = removeTags(dir);
+                directions += direction.Substring(0, direction.Length) + "\n\n";
+            }
+        }
+        else {
+            directions = removeTags(directionsHtml).Replace("Directions:", "");
         }
 
         // Parse the ingredients
