@@ -83,6 +83,10 @@ public class webParser : MonoBehaviour{
                     break;
 
             }
+			result.directions = WWW.UnEscapeURL(result.directions);
+            for (int i = 0; i < result.ingredients.Count; i++) {
+                result.ingredients[i] = WWW.UnEscapeURL(result.ingredients[i]);
+            }
             result.url = url;
             if (result.name.IndexOf('<') > -1) result.name = result.name.Split('<')[0];
             webParser.Instance.func(result, url);
